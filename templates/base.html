@@ -27,7 +27,7 @@
     
         
     <br><br> 
-    <div class="mycontainer">
+    <div class="mycontainer" style="display: inline-block;">
         <form id="addIngr" style="display: inline-block;">
             <table style="display: inline-flex;">
                 <!--Column titles-->
@@ -62,23 +62,10 @@
                     <td style="border: none; text-align: left;"><button type="button" onclick="submitAdd()">Submit</button></td>
                 </tr>
             </table>
+   
         </form>
-        <table style="display: inline-flex;">
-
-            <!--Column title-->
-            {% if data %}
-            <tr>
-                <th>Possible recipes</th>
-            </tr>
-            {% endif %}
-            {% for recipe in data %}
-            <tr>
-               <td>{{ recipe }}</td>
-            </tr>
         
-            {% endfor %}
-           
-        </table>
+      
     
 
         <form id="ingrList" style="display: none;" method="post" action="/add">
@@ -133,17 +120,31 @@
         
            
         <form method="post" action="/updateRecipes" id="updateRecipes"></form>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
+ 
         <div class="content">
             {% block content %}{% endblock %}
         </div>
        
     </div>
+    <div class="mycontainer" style="display: inline-flex; vertical-align: top;">
+        <table style="display: inline-flex;">
+
+            <!--Column title-->
+            {% if data %}
+            <tr>
+                <th>Possible recipes</th>
+            </tr>
+            {% endif %}
+            {% for recipe in data %}
+            <tr>
+               <td>{{ recipe }}</td>
+            </tr>
+        
+            {% endfor %}
+           
+        </table>
+    </div>
+    
   
     <script>
       const form = document.querySelector("form");
