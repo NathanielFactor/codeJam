@@ -1,5 +1,5 @@
-from req import *
-from obj import *
+from mealObjects import *
+from mealRequests import *
 
 user_ingredients = ["chicken", "tomato", "carrots", "lime", "onions", "garlic clove"]
 
