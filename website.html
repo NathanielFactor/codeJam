@@ -113,21 +113,10 @@ body {
             font-size: 22px;
         }
         body{
-            color: antiquewhite;
+            color: rgb(49, 47, 44);
         }
     </style>
 </head>
-
-<style>
-        div.mycontainer {
-            width:100%;
-            overflow:auto;
-            }
-            div.mycontainer div {
-            width:50%;  
-            float:left;
-        }
-        </style>
 
 <body background="copy-space-italian-food-ingredients.jpg">
 
@@ -141,47 +130,55 @@ body {
     
         
     <div class="mycontainer">
-              <!--Ingredient name and expiry dates-->
-            <h2>Enter Ingredients</h2>
-            <form action="/action_page.php">
-            <!--Ingredient names-->
-            <label for="ingredient">Ingredient:</label>
-            <input type="text" id="ingredient"
-            name="ingredient" placeholder="Type in an ingredient"><br><br>
 
-            <!--Expiry dates-->
-            <div>
-                <label for="expdate">Expiry date:</label>
-                <input type="text" id="expdate" expiry date="expdate" placeholder="Type in the expiry date">
-            </div>
+        <table>
 
+            <!--Column titles-->
+            <tr>
+                <th>Ingredient</th>
+                <th>Expiry date</th>
 
+            </tr>
+
+            <!--Input row-->
+            <tr>
+
+                <!--Type ingredient name column-->
+                <td>
+                    <label for="ingredient"></label>
+                    <input type="text" id="ingredient" name="ingredient" placeholder="Type in an ingredient...">
+                </td>
+                
+                <!--Select expiry date column-->
+                <td>
+                    <label for="expdate"></label>
+                    <input type="date" id="expdate" name="expdate">
+                </td>
+
+            </tr>
+
+        </table>
 
             
-            <input type="submit" value="Submit"> <!--submit button-->
-            <input type="reset"> <!--reset button-->
-            <!--<p> <p>-->
-            <button type="button">Generate Recipes</button> <!--generate recipe button-->
-            </form>
+        <input type="submit" value="Submit"> <!--submit button-->
+        <input type="reset"> <!--reset button-->
+        <button type="button">Generate Recipes</button> <!--generate recipe button-->
             
             
-            <div>
-              <h2>Possible recipes:</h2>
-              <ol>
-              <li>Salad</li>
-              <li>Cake</li>
-              <li>Pizza</li>
-              </ol>  
-            </div>
+        <div>
+            <h2>Possible recipes:</h2>
+            <ol>
+            <li>Salad</li>
+            <li>Cake</li>
+            <li>Pizza</li>
+            </ol>  
+        </div>
             
            
     </div>
 
         </form>
     
-
-
-
     
 
 </body>

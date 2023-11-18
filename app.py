@@ -13,6 +13,7 @@ def get_db_connection():
 def index():
     conn = get_db_connection()
     posts = conn.execute('SELECT * FROM posts').fetchall()
+    #CLEAN THIS UP KNOW WHAT YOUR POSTING TO POSTS
     conn.close()
     return render_template('index.html', posts=posts)
 
