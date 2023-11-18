@@ -108,6 +108,7 @@ def updateRecipes():
     ingredients = conn.execute('SELECT * FROM ingredients').fetchall()
     i_list = []
     e_list = []
+    recipes.clear()
     for item in ingredients:
         i_list.append(item['ingredient'])
         expiry = item['expiry']
