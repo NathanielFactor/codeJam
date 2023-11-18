@@ -14,13 +14,13 @@ html,
     --color-quinary: #ee6352;
   }
   
-  
+
   body {
     background-image: url("fresh-colourful-ingredients-mexican-cuisine.jpg");
     background-repeat: no-repeat;
     background-size: 1600px 900px;
 
-	font-family: sans-serif;
+
 	font-weight: 100;
   }
   
@@ -96,7 +96,7 @@ html,
   }
 
   table {
-
+    font-family: "Monaco";
     width: 40%;
   }
 
@@ -110,9 +110,25 @@ html,
     border-bottom: 1px solid #cd8787;
   }
 
-  tr:hover {background-color: rgb(229, 162, 157);}
+  tr {
+    background-color: rgba(255, 255, 255, 0.506)
+  }
+
+  tr:hover {background-color: rgba(229, 162, 157, 0.56);}
   
   th {
     background-color: rgba(234, 131, 131, 0.444);
-    color: white;
+    color: rgb(23, 150, 38);
   }
+
+  button {
+    font-family: "Monaco";
+    gap: 500px;
+
+    border-radius: 12px;
+    font-size: 16px;
+    background-color: rgba(47, 149, 55, 0.328);
+    color: rgb(0, 0, 0);
+    border: 1px solid #027a10; /* Green */
+
+}
