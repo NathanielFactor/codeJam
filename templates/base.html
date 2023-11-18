@@ -25,8 +25,9 @@
 </head>
 
 <body>
-        
+      
     <br><br> 
+    
     <div class="mycontainer" style="display: inline-block;">
         
         <div class="fridge" style="z-index: 3;" onclick="openDoor()">
@@ -97,7 +98,7 @@
             }
         </script>
     
-        <div>
+        <div style="margin-left: 400px;">
         <form id="addIngr" style="display: inline-block;">
             <table id="table" style="display: inline-flex;">
                 <!--Column titles-->
@@ -179,7 +180,8 @@
             </table>
     </div>
     <div class="mycontainer" style="display: inline-flex; vertical-align: top;">
-        <div id="assocRes" class="mycontainer" style="display: inline-block; vertical-align: top;">
+        <table style="display: inline-flex;">
+
             <!--Column title-->
 
             {% if return_rec %}
