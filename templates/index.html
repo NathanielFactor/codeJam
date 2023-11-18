@@ -1,13 +1,34 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>{% block title %} Ingredients {% endblock %}</h1>
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/style.css') }}" />
+
+    <table>
+    <tr>
+        <th width="200">Ingredients</th>
+    </tr>
     {% for ingredient in post %}
-        <div class='post'>
-            <p>{{ ingredient['created'] }}</p>
-            <h2>{{ ingredient['ingredient'] }}</h2>
-            <p>{{ ingredient['expiry'] }}</p>
-            <p>{{ ingredient['amount'] }}</p>
-        </div>
+    <tr>
+        <td>{{ ingredient['ingredient'] }}</td>
+        <td>{{ ingredient['expiry'] }}</td>
+    </tr>
     {% endfor %}
+        
+    </table>
+
+    <table>
+
+        <!--Column title-->
+        <tr>
+            <th width="200">Possible recipes</th>
+        </tr>
+        {% for recipe in data %}
+        <tr>
+           <td>{{ recipe }}</td>
+        </tr>
+    
+        {% endfor %}
+       
+    </table>
+    
 {% endblock %}
