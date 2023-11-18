@@ -245,11 +245,13 @@
             
         </table>
 
-        
+    </div>
+    <div id="possibleRecipes" class="mycontainer" style="display: none; vertical-align: top;">
+            <!--Column title-->
+            <p>Possible recipes</p>
+            <data>  
 
-
-      
-
+            </data>
     </div>
     
   
@@ -323,6 +325,11 @@
         function updateRecipes() {
             var form = document.getElementById("updateRecipes");
             form.submit();
+        }
+
+        function showPossibleRecipes() {
+            var possibleRecipesTable = document.getElementById('possibleRecipes');
+            possibleRecipesTable.style.display = 'inline-block';
         }
     </script>
     

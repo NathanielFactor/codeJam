@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        table, th, td {
+            border: 1px solid black;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        tr:hover {
+            background-color: #f73a3a; /* Change the background color on hover */
+            cursor: pointer; /* Change cursor to pointer on hover */
+        }
+
+        .hidden-box {
+            display: none;
+            border: 1px solid #ddd;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<table id="myTable">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr onclick="showDetails(this)">
+            <td>John Doe</td>
+            <td>john.doe@example.com</td>
+            <td>123-456-7890</td>
+        </tr>
+        <!-- Add more rows as needed -->
+    </tbody>
+</table>
+
+<div id="detailsBox" class="hidden-box">
+    <!-- Content of the revealed box goes here -->
+</div>
+
+<script>
+    function showDetails(row) {
+        // Get the data from the clicked row
+        var cells = row.getElementsByTagName("td");
+        var name = cells[0].innerText;
+        var email = cells[1].innerText;
+        var phone = cells[2].innerText;
+
+        // Build the content for the revealed box
+        var detailsContent = "<p><strong>Name:</strong> " + name + "</p>";
+        detailsContent += "<p><strong>Email:</strong> " + email + "</p>";
+        detailsContent += "<p><strong>Phone:</strong> " + phone + "</p>";
+
+        // Display the content in the details box
+        var detailsBox = document.getElementById("detailsBox");
+        detailsBox.innerHTML = detailsContent;
+
+        // Show the details box
+        detailsBox.style.display = "block";
+    }
+</script>
+
+</body>
+</html>
