@@ -24,19 +24,84 @@
 </head>
 
 <body>
-    
         
     <br><br> 
     <div class="mycontainer" style="display: inline-block;">
+        
+        <div class="fridge" style="z-index: 3;" onclick="openDoor()">
+            <div class="inside"></div>
+            <div class="door"></div>
+            <div class="handle"></div>
+        </div>
+        <div class="fridge" style="z-index: 1; background-color: white;">
+            <div class="close" onclick="openDoor()"></div>
+            <div>
+                <form style="display: inline-flex;" id="updateIng" action="/updateIngredients" method="post">
+                <table>
+                    <!--Table title-->
+                    <tr align="center">
+                      <th colspan="3">Previously entered items</th>
+                    </tr>
+                
+                    <!--Column titles-->
+                    <tr>
+                      <th width="150">Ingredient name</th>
+                      <th width="75">Days left</th>
+                      <th width="75">Cooked!</th>
+                    </tr>
+                    
+                    {% for ingredient in exp%}
+                    <tr>
+                        <td>{{ ingredient }}</td>
+                        <td style="color: red;">{{ eDays[loop.index-1] }}</td>
+                        <td><input type="checkbox"
+                             name="{{ e_ids[loop.index-1] }}" 
+                             id=""></td>
+                    </tr>
+                    {% endfor %}
+                    {% for ingredient in post%}
+                    <tr>
+                        <td>{{ ingredient }}</td>
+                        <td>{{ days[loop.index-1] }}</td>
+                        <td><input type="checkbox"
+                             name="{{ i_ids[loop.index-1] }}" 
+                             id=""></td>
+                    </tr>
+                    {% endfor %}
+                    <tr style="background-color: transparent;">
+                        <td style="border: none;"><button type="button" onclick="updateIngredients()">Update Ingredients</button></td>
+                        <td style="border: none;"><button type="button" onclick="updateRecipes()">Generate Recipes</button></td>
+                    </tr>
+                
+                  </table>
+        
+                </form>
+                </div>
+        </div>
+    
+        
+    
+        <script>
+            function openDoor() {
+                var fridge = document.querySelector('.fridge');
+                var door = document.querySelector('.door');
+    
+                // Toggle the 'open' class to rotate the door
+                fridge.classList.toggle('open');
+                door.classList.toggle('open');
+            }
+        </script>
+    
+        <div>
         <form id="addIngr" style="display: inline-block;">
-            <table style="display: inline-flex;">
+            <table id="table" style="display: inline-flex;">
                 <!--Column titles-->
+                
+                <tbody id="tbody">
                 <tr> 
                     <th width="200">Ingredient</th>
                     <th width="200">Expiry date</th>
-    
                 </tr>
-    
                 <!--Input row-->
                 <tr align="center">
     
@@ -52,6 +117,7 @@
                         <input type="date" id="expdate" name="expdate">
                     </td>
                 </tr>
+            </tbody>
             </table>
             <br>
             <table>
@@ -62,9 +128,8 @@
                     <td style="border: none; text-align: left;"><button type="button" onclick="submitAdd()">Submit</button></td>
                 </tr>
             </table>
-   
         </form>
-        
+    </div>
       
     
 
@@ -75,46 +140,7 @@
         <br>
         
         <br><br><br><br><br>
-        <form style="display: inline-flex;" id="updateIng" action="/updateIngredients" method="post">
-        <table>
-            <!--Table title-->
-            <tr align="center">
-              <th colspan="3">Previously entered items</th>
-            </tr>
         
-            <!--Column titles-->
-            <tr>
-              <th width="150">Ingredient name</th>
-              <th width="75">Days left</th>
-              <th width="75">Cooked!</th>
-            </tr>
-            
-            {% for ingredient in exp%}
-            <tr>
-                <td>{{ ingredient }}</td>
-                <td style="color: red;">{{ eDays[loop.index-1] }}</td>
-                <td><input type="checkbox"
-                     name="{{ e_ids[loop.index-1] }}" 
-                     id=""></td>
-            </tr>
-            {% endfor %}
-            {% for ingredient in post%}
-            <tr>
-                <td>{{ ingredient }}</td>
-                <td>{{ days[loop.index-1] }}</td>
-                <td><input type="checkbox"
-                     name="{{ i_ids[loop.index-1] }}" 
-                     id=""></td>
-            </tr>
-            {% endfor %}
-            <tr style="background-color: transparent;">
-                <td style="border: none;"><button type="button" onclick="updateIngredients()">Update Ingredients</button></td>
-                <td style="border: none;"><button type="button" onclick="updateRecipes()">Generate Recipes</button></td>
-            </tr>
-        
-          </table>
-
-        </form>
          
         <br>
         
@@ -144,12 +170,33 @@
            
         </table>
     </div>
+    <div class="mycontainer" style="display: inline-flex; vertical-align: top;">
+        <table style="display: inline-flex;">
+
+            <!--Column title-->
+            {% if data %}
+            <tr>
+                <th>Possible recipes</th>
+            </tr>
+            {% endif %}
+            {% for recipe in data %}
+            <tr>
+               <td>{{ recipe }}</td>
+            </tr>
+        
+            {% endfor %}
+           
+        </table>
+    </div>
     
   
     <script>
-      const form = document.querySelector("form");
-      const tbody = document.querySelector("tbody");
-      const table = document.querySelector("table");
+      const form = document.getElementById("addIngr");
+      const tbody = document.getElementById("tbody");
+      const table = document.getElementById("table");
+
+      var counter = 0;
+      var ids = [];
 
       function validateDate(date) {
             // Get the input element
@@ -161,12 +208,24 @@
             // Compare the entered date with the current date
             return enteredDate >= currentDate;
         }
+    
+       function replaceWEmpty(inputString, i) {
+        alert(typeof(inputString))
+        var parts = inputString.split(",");
+        alert("hi")
+        for (var j = 0; j < parts.length; j++) {
+            if (j == i) {
+                parts[j] = "";
+            }            
+        }
+        return(parts.join(","));
+       }
+        
 
       function onAddWebsite(e) {
         e.preventDefault();
         const ingredient = document.getElementById("ingredient").value;
         var expdate = document.getElementById("expdate").value;
-
 
         if (ingredient=="" || expdate==""){
             alert("Please fill in all fields");
@@ -180,9 +239,10 @@
             <tr>
                 <td>${ingredient}</td>
                 <td>${expdate}</td>
-                <td><button class = "deleteBtn">Delete</button></td>
+                <td id="${counter}"><button class = "deleteBtn">Delete</button></td>
             </tr>
             `;
+            counter++;
         }
 
       }
@@ -192,6 +252,10 @@
           return;
         }
         const btn = e.target;
+        tdId = btn.closest("td").id;
+        alert(tdId)
+        document.getElementById("iList").value = replaceWEmpty(document.getElementById("iList").value, tdId);
+        document.getElementById("eList").value = replaceWEmpty(document.getElementById("eList").value, tdId);
         btn.closest("tr").remove();
       }
       form.addEventListener("submit", onAddWebsite);
