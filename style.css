@@ -17,7 +17,7 @@ html,
 
 
   body {
-    background-image: url("fresh-colourful-ingredients-mexican-cuisine.jpg");
+    background-image: url("orangekitchen.png");
     background-repeat: no-repeat;
     background-size: 1600px 900px;
 	font-weight: 100;
@@ -160,4 +160,3 @@ button:active {
     position: relative;
     right: 5000px; /* Move the image 50 pixels to the right */
   }
-
