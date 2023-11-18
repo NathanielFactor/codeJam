@@ -97,9 +97,9 @@ html,
 
   .fridge {
     position: absolute;
-    right: 5%;
-    width: 380px;
-    height: 550px;
+    left: 5%;
+    width: 350px;
+    height: 500px;
     background-color: #ccc;
     border: 10px solid #ccc;
     border-radius: 10px;
@@ -206,19 +206,27 @@ html,
   }
 
   button {
-    font-family: "Monaco";
-    gap: 500px;
-
+    font-family: "Lucida Console", monospace;
     border-radius: 12px;
     font-size: 16px;
-    background-color: rgba(47, 149, 55, 0.328);
+    background-color: rgb(113, 189, 119);
     color: rgb(0, 0, 0);
-    border: 1px solid #027a10; /* Green */
-
-}
+    display: inline-block;
+    text-align: center;
+    padding: 5px;
+    transition: all 0.5s;
+    cursor: pointer;
+    margin: 5px;
+    box-shadow: 0 6px rgba(67, 113, 71, 0.774);
+    font-size: 12px;
+  }
 
 button:hover {
-  background-color: rgba(47, 149, 55, 0.328);
   color: white;
   cursor: pointer;
 }
+
+button:active {
+    box-shadow: 0 6px rgba(67, 113, 71, 0.774);
+    transform: translateY(4px);
+  }
