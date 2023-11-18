@@ -58,11 +58,21 @@ def get_ingredients_by_id(id):
         data = requests.get(url).json()
         for item in data['meals']:
             for i in range(1, 21):
-                if (item[f'strIngredient{i}'] != "" and item[f'strIngredient{i}'] != None):
-                    ingredients.append(item[f'strIngredient{i}'])
+                if (item[f'strIngredient{i}'] == ""):
+                    return ingredients
+                ingredients.append(item[f'strIngredient{i}'])
     except (ValueError, KeyError, TypeError):
         print("JSON format error")
     return ingredients
+
+def get_recipe_by_id(id):
+    url = "https://www.themealdb.com/api/json/v1/1/lookup.php?i=" + id
+    try:
+        data = requests.get(url).json()
+        recipe = Recipe(id, data['strMeal'], data['strCategory'], data['strInstructions'], data['strMealThumb'])
+    except (ValueError, KeyError, TypeError):
+        print("JSON format error")
+    return recipe
 
 def compare(str1, str2, threshold=70):
     similarity_score = fuzz.partial_ratio(str1, str2)
