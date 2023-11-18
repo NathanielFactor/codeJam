@@ -97,7 +97,11 @@ html,
 
   .fridge {
     position: absolute;
+<<<<<<< HEAD
     left: 30%;
+=======
+    left: 2%;
+>>>>>>> cc6b5e22ef0357e6e76525489b912d2f27861618
     width: 350px;
     height: 500px;
     background-color: #ccc;

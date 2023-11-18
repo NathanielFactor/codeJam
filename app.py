@@ -13,7 +13,9 @@ app = Flask(__name__)
 
 
 recipes = []
-recipeIds =[]
+returnRec = []
+
+
 def shortest_date_interval(date_str1, date_str2):
     date1 = datetime.strptime(date_str1, '%Y-%m-%d')
     date2 = datetime.strptime(date_str2, '%Y-%m-%d')
@@ -56,8 +58,9 @@ def index():
         else:
             ret_ing.append(datapoint[0])
             ret_days.append(datapoint[1])
-            i_ids.append(datapoint[2])  
-    return render_template('index.html', post=ret_ing, days=ret_days, exp=exp_ing, eDays=exp_days, data=recipes, e_ids=e_ids, i_ids=i_ids)
+            i_ids.append(datapoint[2])
+    print(returnRec)  
+    return render_template('index.html', post=ret_ing, days=ret_days, exp=exp_ing, eDays=exp_days, data=recipes, e_ids=e_ids, i_ids=i_ids, return_rec = returnRec)
 
 @app.route('/add', methods = ['POST'])
 def add():
@@ -136,6 +139,16 @@ def updateRecipes():
     else:
         recipes.clear()
     conn.close()
+    return redirect(url_for('index'))
+
+@app.route('/loadRecipe', methods = ['POST'])
+def load():
+    returnRec.clear()
+    recipe = get_recipe_by_name(request.form['displayRecipe'])
+    returnRec.append(recipe.get_meal())
+    returnRec.append(recipe.get_category())
+    returnRec.append(recipe.get_instructions())
+    returnRec.append(recipe.get_thumbnail())
     return redirect(url_for('index'))
 
 if __name__ == '__main__':

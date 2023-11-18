@@ -25,8 +25,9 @@
 </head>
 
 <body>
-        
+      
     <br><br> 
+    
     <div class="mycontainer" style="display: inline-block;">
         
         <div class="fridge" style="z-index: 3;" onclick="openDoor()">
@@ -97,7 +98,7 @@
             }
         </script>
     
-        <div>
+        <div style="margin-left: 400px;">
         <form id="addIngr" style="display: inline-block;">
             <table id="table" style="display: inline-flex;">
                 <!--Column titles-->
@@ -158,40 +159,39 @@
        
     </div>
     <div class="mycontainer" style="display: inline-flex; vertical-align: top;">
-        <table style="display: inline-flex;">
+        <form id="recipe" style="display: none;" action="/loadRecipe" method="post">
+            <input type="text" name="displayRecipe" id="displayRecipe">
+        </form>
+            <table style="display: inline-flex;">
 
-            <!--Column title-->
-            {% if data %}
-            <tr>
-                <th>Possible recipes</th>
-            </tr>
-            {% endif %}
-            {% for recipe in data %}
-            <tr>
-               <td>{{ recipe }}</td>
-            </tr>
-            {% endfor %}
-           
-        </table>
+                <!--Column title-->
+                {% if data %}
+                <tr>
+                    <th>Possible recipes</th>
+                </tr>
+                {% endif %}
+                {% for recipe in data %}
+                <tr>
+                   <td id="r{{loop.index-1}}" name="{{ recipe }}" onclick="showAssocRes(id)">{{ recipe }}</td>
+                </tr>
+            
+                {% endfor %}
+               
+            </table>
     </div>
     <div class="mycontainer" style="display: inline-flex; vertical-align: top;">
         <table style="display: inline-flex;">
 
             <!--Column title-->
-            {% if data %}
             <tr>
-                <th>Possible recipes</th>
+                <th1> strMeal </th1> <!--INSERT EMBED THE YOUTUBE VIDEO HERE-->
+                <th2> Image link </th2> <!--INSERT IMAGE-->
+                <p> Instructions </p> <!--INSERT INSTRUCTIONS-->
             </tr>
-            {% endif %}
-            {% for recipe in data %}
-            <tr>
-               <td>{{ recipe }}</td>
-            </tr>
-        
-            {% endfor %}
-           
+
         </table>
     </div>
+ 
     
   
     <script>
@@ -214,9 +214,7 @@
         }
     
        function replaceWEmpty(inputString, i) {
-        alert(typeof(inputString))
         var parts = inputString.split(",");
-        alert("hi")
         for (var j = 0; j < parts.length; j++) {
             if (j == i) {
                 parts[j] = "";
@@ -257,7 +255,6 @@
         }
         const btn = e.target;
         tdId = btn.closest("td").id;
-        alert(tdId)
         document.getElementById("iList").value = replaceWEmpty(document.getElementById("iList").value, tdId);
         document.getElementById("eList").value = replaceWEmpty(document.getElementById("eList").value, tdId);
         btn.closest("tr").remove();
@@ -286,6 +283,12 @@
             form.submit();
             var loadingContainer = document.getElementById('loading-container');
             loadingContainer.style.display = 'block';
+        }
+        function showAssocRes(id) {
+            var rName = document.getElementById(id).innerHTML
+            document.getElementById("displayRecipe").value = rName;
+            var form = document.getElementById("recipe");
+            form.submit();
         }
     </script>
     
