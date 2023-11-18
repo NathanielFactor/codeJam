@@ -2,9 +2,8 @@
 <html lang="en">
 
 <div class="content">
-    <h2 class="text-shadows">LET THEM COOOK</h2>
+    <h2 class="text-shadows">Waste2Taste</h2>
 </div>
-
 
 
 <head>
@@ -24,7 +23,7 @@
 </head>
 
 <body>
-    
+
         
     <br><br> 
     <div class="mycontainer" style="display: inline-block;">
@@ -140,10 +139,28 @@
             
             <tr style="background-color: transparent;">
                 <td style="border: none;"><button type="button" onclick="updateIngredients()">Update Ingredients</button></td>
-                <td style="border: none;"><button type="button" onclick="updateRecipes()">Generate Recipes</button></td>
+                <td style="border: none;"><button type="button" onclick="showLoadingIcon()">Generate Recipes</button></td>
             </tr>
         
           </table>
+
+          <div id="loading-container" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255, 255, 255, 0.8); text-align: center;">
+            <img id="loading-image" src="https://cdn.dribbble.com/users/655390/screenshots/2186909/loader-for-dribble.gif" alt="Loading..." style="width: 1500px; height: 800px;">
+        </div>
+        
+        <script>
+            function showLoadingIcon() {
+                var loadingContainer = document.getElementById('loading-container');
+                loadingContainer.style.display = 'block';
+        
+                setTimeout(function () {
+                    loadingContainer.style.display = 'none';
+                }, 5000);
+            }
+        </script>
+        
+        
+        
 
         </form>
          
@@ -166,6 +183,7 @@
     </div>
     <div class="mycontainer" style="display: inline-flex; vertical-align: top;">
         <table style="display: inline-flex;">
+
 
             <!--Column title-->
             
@@ -224,8 +242,13 @@
             </tr>
         
             
-           
         </table>
+
+        
+
+
+      
+
     </div>
     
   
