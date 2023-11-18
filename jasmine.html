@@ -56,7 +56,7 @@
         </table>
 
         <form> 
-        <input type="submit" value="Submit"> <!--submit button-->
+        <input type="submit" value="Add Ingredient"> <!--submit button-->
         <script>
           const submit = document.getElementById("submit");
           submit.addEventListener("click", function(e){
@@ -124,15 +124,33 @@
   
     <script>
       const form = document.querySelector("form");
+      const tbody = document.querySelector("tbody");
+      const table = document.querySelector("table");
 
       function onAddWebsite(e) {
         e.preventDefault();
         const ingredient = document.getElementById("ingredient").value;
         const expdate = document.getElementById("expdate").value;
-        alert(ingredient + expdate);
-      
+
+
+        tbody.innerHTML += `
+          <tr>
+            <td>${ingredient}</td>
+            <td>${expdate}</td>
+            <td><button class = "deleteBtn">Delete</button></td>
+          </tr>
+        `;
+      }
+
+      function onDeleteRow(e) {
+        if (!e.target.classList.contains("deleteBtn")) {
+          return;
+        }
+        const btn = e.target;
+        btn.closest("tr").remove();
       }
       form.addEventListener("submit", onAddWebsite);
+      table.addEventListener("click", onDeleteRow);
     </script>
 
     
