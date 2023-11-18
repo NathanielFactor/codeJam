@@ -68,23 +68,33 @@ def compare(str1, str2, threshold=70):
     similarity_score = fuzz.partial_ratio(str1, str2)
     return similarity_score >= threshold
 
-def get_suitability(meal, user_ingredients):
-    suitability = 0
+def get_suitability(meal, user_ingredients, expiring):
     meal_ingredients = get_ingredients_by_id(meal.get_id())
     i_length = len(meal_ingredients)
+    expire_length = len(expiring)
+    suitability = 0
+    expire_num = 0
     for i in range(len(user_ingredients)):
         for j in range(len(meal_ingredients)):
             if compare(user_ingredients[i], meal_ingredients[j]):
+                if user_ingredients[i] in expiring:
+                    expire_num += 1
                 suitability += 1
-    suitability = suitability/i_length
+                meal_ingredients.remove(meal_ingredients[j])
+                break
+    if i_length != 0:
+        suitability = suitability/i_length
+        print("previous " + str(suitability))
+    if expire_length != 0:
+        suitability = suitability*0.3 + (expire_num/expire_length)*0.7
+        print("after " + str(suitability))
     return suitability
 
-def rank_meals(meals, user_ingredients):
-    ranked_meals = []
-    for meal in meals:
-        ranked_meals.append((meal, get_suitability(meal, user_ingredients)))
+def rank_meals(meals, user_ingredients, expiring):
+    ranked_meals = [[meal, get_suitability(meal, user_ingredients, expiring)] for meal in meals]
     ranked_meals.sort(key=lambda x: x[1], reverse=True)
-    return ranked_meals
+    return_array = [ranked_meals[i][0] for i in range(0,10)]
+    return return_array
 
 def get_meals_by_expire(expiring):
     meals = []

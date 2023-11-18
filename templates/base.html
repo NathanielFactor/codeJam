@@ -1,37 +1,97 @@
+
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>{% block title %} {% endblock %}- FlaskApp</title>
-    <style>
-        .post {
-            padding: 10px;
-            margin: 5px;
-            background-color: #f3f3f3
-        }
 
-        nav a {
-            color: #d64161;
-            font-size: 3em;
-            margin-left: 50px;
-            text-decoration: none;
+
+
+<head>
+
+    <div class="content">
+        <h2 class="text-shadows">Let Them COOK</h2>
+    </div>
+
+    <meta charset="UTF-8">
+    <title>CodeJam</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/style.css') }}" />
+
+    <style>
+        html{
+            font-size: 22px;
+        }
+        body{
+            color: rgb(0, 0, 0);
+            background-image: url("{{ url_for('static', filename='images/fresh-colourful-ingredients-mexican-cuisine.jpg') }}");
         }
     </style>
+
+
 </head>
+
 <body>
-    <nav>
-        <a href="{{ url_for('index') }}">FlaskApp</a>
-        <a href="#">About</a>
-        <form method="post" action="/add">
-            <input type="submit">
+    
+        
+    <br><br> 
+    <div class="mycontainer">
+        <form id="add" action="/add" method="POST">
+            <table>
+                <!--Column titles-->
+                <tr> 
+                    <th width="200">Ingredient</th>
+                    <th width="200">Expiry date</th>
+
+                </tr>
+
+                <!--Input row-->
+                <tr align="center">
+
+                    <!--Type ingredient name column-->
+                    <td>
+                        <label for="ingredient"></label>
+                        <input type="text" id="ingredient" name="ingredient" placeholder="Type in an ingredient...">
+                    </td>
+                    
+                    <!--Select expiry date column-->
+                    <td>
+                        <label for="expdate"></label>
+                        <input type="date" id="expdate" name="expdate">
+                    </td>
+
+                </tr>
+
+            </table>
         </form>
-        <form method="post" action="/clearTable">
-            <input type="submit" value="Clear">
-        </form>
-    </nav>
-    <hr>
-    <div class="content">
-        {% block content %} {% endblock %}
+        <form id="update" method="POST" action="/updateRecipes" style="display: hidden;"></form>
+
+    
+
+        <button type="button" onclick="submitAdd()">Submit</button>
+        <button type="button">Reset</button> <!--reset button-->
+        <button type="button" onclick="submitUpdate()">Generate Recipes</button> <!--generate recipe button-->
+        <div class="content">
+            {% block content %} {% endblock %}
+        </div>
+           
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+             
     </div>
+ 
+
+    
+    <script>
+        function submitAdd() {
+            var form = document.getElementById("add");
+            form.submit();
+        }
+        function submitUpdate() {
+            var form = document.getElementById("update");
+            form.submit();
+        }
+
+    </script>
+
 </body>
-</html>
