@@ -5,6 +5,10 @@ html,
   *::after {
     box-sizing: border-box;
   }
+
+  html{
+    font-size: 22px;
+    }
   
   :root {
     --color-primary: #f6aca2;
@@ -16,6 +20,7 @@ html,
   
 
   body {
+    color: rgb(0, 0, 0);
     background-image: url("fresh-colourful-ingredients-mexican-cuisine.jpg");
     background-repeat: no-repeat;
     background-size: 1600px 900px;
