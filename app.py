@@ -55,5 +55,5 @@ def updateRecipes():
 
 if __name__ == '__main__':
     ingredients = ["chicken", "tomato", "carrots", "lime", "onions", "garlic clove"]
-    get_meals_by_expire(ingredients)
+    print(get_meals_by_expire(ingredients))
     app.run(debug=True)
