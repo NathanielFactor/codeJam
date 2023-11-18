@@ -1,5 +1,5 @@
 import sqlite3
-from flask import Flask, render_template
+from flask import Flask, render_template, redirect, url_for
 
 app = Flask(__name__)
 
@@ -13,16 +13,16 @@ def get_db_connection():
 def index():
     conn = get_db_connection()
         
-    posts = conn.execute('SELECT * FROM posts').fetchall()
+    ingredients = conn.execute('SELECT * FROM ingredients').fetchall()
     conn.close()
-    return render_template('index.html', posts=posts)
+    return render_template('index.html', post=ingredients)
 
 @app.route('/add', methods = ['POST'])
 def add():
     conn =get_db_connection()
     cur = conn.cursor()
-    cur.execute("INSERT INTO ingredients (title, content) VALUES (?, ?)",
-            ('Fourth ingredients', 'Content for the fourth ingredients')
+    cur.execute("INSERT INTO ingredients (ingredient, expiry, amount) VALUES (?, ?, ?)",
+            ('Fourth ingredients', 0, 1)
             )
     conn.commit()
     conn.close()
@@ -32,7 +32,7 @@ def add():
 def remove():
     conn =get_db_connection()
     cur = conn.cursor()
-    cur.execute("DELETE FROM posts  ")
+    cur.execute("DELETE FROM ingredients  ")
     conn.commit()
     conn.close()
     return redirect(url_for('index'))
