@@ -5,19 +5,6 @@
     <h2 class="text-shadows">LET THEM COOOK</h2>
 </div>
 
-<style>
-    .container-wrapper {
-        display: flex;
-        justify-content: flex-end; /* Align to the right */
-        align-items: flex-start; /* Align to the top */
-        margin-left:1000px;
-    }
-
-    .mycontainer {
-        display: inline-flex;
-        vertical-align: top;
-    }
-</style>
 
 
 <head>
@@ -40,39 +27,6 @@
     
         
     <br><br> 
-    <div class="container-wrapper">
-        <div class="mycontainer">
-            <table>
-                <!-- Column title -->
-                {% if data %}
-                <tr>
-                    <th>Possible recipes</th>
-                </tr>
-                {% endif %}
-                {% for recipe in data %}
-                <tr>
-                    <td>{{ recipe }}</td>
-                </tr>
-                {% endfor %}
-            </table>
-        </div>
-
-        <div class="mycontainer">
-            <table>
-                <!-- Column title -->
-                {% if data %}
-                <tr>
-                    <th>Possible recipes</th>
-                </tr>
-                {% endif %}
-                {% for recipe in data %}
-                <tr>
-                    <td>{{ recipe }}</td>
-                </tr>
-                {% endfor %}
-            </table>
-        </div>
-    </div>
     <div class="mycontainer" style="display: inline-block;">
         <form id="addIngr" style="display: inline-block;">
             <table style="display: inline-flex;">
@@ -111,6 +65,7 @@
    
         </form>
         
+      
     
 
         <form id="ingrList" style="display: none;" method="post" action="/add">
@@ -171,8 +126,43 @@
         </div>
        
     </div>
+    <div class="mycontainer" style="display: inline-flex; vertical-align: top;">
+        <table style="display: inline-flex;">
 
-    
+            <!--Column title-->
+            {% if data %}
+            <tr>
+                <th>Possible recipes</th>
+            </tr>
+            {% endif %}
+            {% for recipe in data %}
+            <tr>
+               <td>{{ recipe }}</td>
+            </tr>
+        
+            {% endfor %}
+           
+        </table>
+    </div>
+
+    <div class="mycontainer" style="display: inline-flex; vertical-align: top;">
+        <table style="display: inline-flex;">
+
+            <!--Column title-->
+            {% if data %}
+            <tr>
+                <th>Possible recipes</th>
+            </tr>
+            {% endif %}
+            {% for recipe in data %}
+            <tr>
+               <td>{{ recipe }}</td>
+            </tr>
+        
+            {% endfor %}
+           
+        </table>
+    </div>
     
   
     <script>

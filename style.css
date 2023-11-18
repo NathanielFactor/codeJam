@@ -94,8 +94,9 @@ html,
   }
 
   table {
-    font-family: "Monaco";
+    
     display: inline-block;
+    border-radius: 12px;
     
   }
 
@@ -127,15 +128,15 @@ html,
 
   button {
     font-family: "Monaco";
-    gap: 500px;
+    gap: 100px;
     border-radius: 12px;
     font-size: 16px;
     background-color: rgb(113, 189, 119);
-    color: rgb(4, 4, 4);
+    color: rgb(0, 0, 0);
     width: 200px;
     display: inline-block;
     text-align: center;
-    padding: 10px;
+    padding: 5px;
     transition: all 0.5s;
     cursor: pointer;
     margin: 5px;
