@@ -115,7 +115,6 @@ html,
 
   tr {
     border-radius: 12px;
-    background-color: rgba(255, 255, 255, 0.747)
   }
 
   tr:hover {background-color: rgba(229, 162, 157, 0.56);}
@@ -156,3 +155,11 @@ button:active {
     transform: translateY(4px);
   }
 
+  .hide {
+    display: none;
+  }
+  
+  .mycontainer:hover + .hide {
+    display: block;
+    color: red;
+  }
