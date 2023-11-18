@@ -1,8 +1,9 @@
-DROP TABLE IF EXISTS posts;
+DROP TABLE IF EXISTS ingredients;
 
-CREATE TABLE posts (
+CREATE TABLE ingredients (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    title TEXT NOT NULL,
-    content TEXT NOT NULL
+    ingredient TEXT NOT NULL,
+    expiry INTEGER NOT NULL,
+    amount INTEGER NOT NULL
 );
