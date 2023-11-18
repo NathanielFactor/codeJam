@@ -15,11 +15,13 @@ html,
   }
   
 
+
   body {
     background-image: url("fresh-colourful-ingredients-mexican-cuisine.jpg");
     background-repeat: no-repeat;
     background-size: 1600px 900px;
 	font-weight: 100;
+    font-family: "Lucida Console", monospace;
   }
   
   .content {
@@ -32,7 +34,7 @@ html,
     text-shadow: 3px 3px 0 var(--color-secondary), 6px 6px 0 var(--color-tertiary),
       9px 9px var(--color-quaternary), 12px 12px 0 var(--color-quinary);
     font-family: bungee, sans-serif;
-    font-weight: 400;
+    font-weight: bold;
     text-transform: uppercase;
     font-size: calc(2rem + 5vw);
     text-align: center;
@@ -94,8 +96,8 @@ html,
   }
 
   table {
-    font-family: "Monaco";
     display: inline-block;
+    border-collapse: collapse;
     border-radius: 12px;
   }
 
@@ -105,12 +107,14 @@ html,
   }
 
   th, td {
+    border-radius: 12px;
     padding-left: 15px;
     padding-right: 15px;
-    border-bottom: 1px solid #cd8787;
+    
   }
 
   tr {
+    border-radius: 12px;
     background-color: rgba(255, 255, 255, 0.747)
   }
 
@@ -126,7 +130,7 @@ html,
   }
 
   button {
-    font-family: "Monaco";
+    font-family: "Lucida Console", monospace;
     gap: 100px;
     border-radius: 12px;
     font-size: 16px;
