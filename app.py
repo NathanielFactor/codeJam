@@ -8,11 +8,9 @@ def get_db_connection():
     conn.row_factory = sqlite3.Row
     return conn
 
-
 @app.route('/')
 def index():
     conn = get_db_connection()
-        
     ingredients = conn.execute('SELECT * FROM ingredients').fetchall()
     conn.close()
     return render_template('index.html', post=ingredients)
@@ -30,7 +28,7 @@ def add():
 
 @app.route('/clearTable', methods = ['POST'])
 def remove():
-    conn =get_db_connection()
+    conn = get_db_connection()
     cur = conn.cursor()
     cur.execute("DELETE FROM ingredients  ")
     conn.commit()

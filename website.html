@@ -113,7 +113,7 @@ body {
             font-size: 22px;
         }
         body{
-            color: rgb(49, 47, 44);
+            color: rgb(0, 0, 0);
         }
     </style>
 </head>
@@ -146,7 +146,6 @@ body {
 
                 <!--Type ingredient name column-->
                 <td>
-                    
                     <label for="ingredient"></label>
                     <input type="text" id="ingredient" name="ingredient" placeholder="Type in an ingredient...">
                 </td>
@@ -169,39 +168,32 @@ body {
         <br><br>
 
         <div>
-            <table>
+            <table bgcolor="black" width="400">
 
                 <!--Column title-->
-                <tr>
-                    <th></th> <!--left empty for the recipe number column-->
-                    <th>Possible recipes</th>
+                <tr bgcolor="grey">
+                    <th width="200"></th> <!--left empty for the recipe number column-->
+                    <th width="200">Possible recipes</th>
                 </tr>
 
-                <!--Links to recipes in order or priority?-->
+                <!--number of recipes, three for now and their links-->
+                <tr bgcolor="lightgrey">
+                  <td>1.</td> <td>link</td>
+                </tr> <!--recipe 1-->
 
-                <tr>
-                    <td>
+                <tr bgcolor="lightgrey">
+                  <td>2.</td> <td>link</td>
+                </tr> <!--recipe 2-->
 
-
-                    </td>
-                </tr>
+                <tr bgcolor="lightgrey">
+                  <td>3.</td> <td>link</td>
+                </tr> <!--recipe 3-->
                
             </table>
 
         
         </div>
-
-
-        <div>
-            <h2>Possible recipes:</h2>
-            <ol>
-            <li>Salad</li>
-            <li>Cake</li>
-            <li>Pizza</li>
-            </ol>  
-        </div>
-            
-           
+             
     </div>
 
         </form>
