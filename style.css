@@ -124,7 +124,6 @@ html,
   }
   
   th {
-    background-color: rgba(234, 131, 131, 0.444);
     color: rgb(0, 0, 0);
   }
 
@@ -155,11 +154,10 @@ button:active {
     transform: translateY(4px);
   }
 
-  .hide {
-    display: none;
+
+
+  .custom-position {
+    position: relative;
+    right: 5000px; /* Move the image 50 pixels to the right */
   }
-  
-  .mycontainer:hover + .hide {
-    display: block;
-    color: red;
-  }
+
