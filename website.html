@@ -57,6 +57,8 @@
 
         <form> 
         <input type="submit" value="Add Ingredient"> <!--submit button-->
+        <br>
+    
         <script>
           const submit = document.getElementById("submit");
           submit.addEventListener("click", function(e){
@@ -85,7 +87,23 @@
         <button type="button">Submit</button>
         <button type="button">Reset</button> <!--reset button-->
         <button type="button">Generate Recipes</button> <!--generate recipe button-->
-           
+        
+        <table>
+          <!--Table title-->
+          <tr align="center">
+            <th>Previously entered items</th>
+          </tr>
+
+          <!--Column titles-->
+          <tr>
+            <th>Ingredient name</th>
+            <th>Expiry date</th>
+            <th>Days left until expiration</th>
+          </tr>
+
+        </table>
+        
+
         <br>
         <br>
         <br>
