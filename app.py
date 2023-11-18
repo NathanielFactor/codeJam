@@ -12,8 +12,7 @@ def get_db_connection():
 @app.route('/')
 def index():
     conn = get_db_connection()
-    posts = conn.execute('SELECT * FROM posts').fetchall()
-    #CLEAN THIS UP KNOW WHAT YOUR POSTING TO POSTS
+    posts = conn.execute('SELECT * FROM ingredients').fetchall()
     conn.close()
     return render_template('index.html', posts=posts)
 
@@ -21,8 +20,8 @@ def index():
 def add():
     conn =get_db_connection()
     cur = conn.cursor()
-    cur.execute("INSERT INTO posts (title, content) VALUES (?, ?)",
-            ('Fourth Post', 'Content for the fourth post')
+    cur.execute("INSERT INTO ingredients (title, content) VALUES (?, ?)",
+            ('Fourth ingredients', 'Content for the fourth ingredients')
             )
     conn.commit()
     conn.close()
@@ -32,7 +31,7 @@ def add():
 def remove():
     conn =get_db_connection()
     cur = conn.cursor()
-    cur.execute("DELETE FROM posts")
+    cur.execute("DELETE FROM ingredients")
     conn.commit()
     conn.close()
     return redirect(url_for('index'))
