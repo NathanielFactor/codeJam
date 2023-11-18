@@ -19,8 +19,6 @@ html,
     background-image: url("fresh-colourful-ingredients-mexican-cuisine.jpg");
     background-repeat: no-repeat;
     background-size: 1600px 900px;
-
-
 	font-weight: 100;
   }
   
@@ -127,13 +125,13 @@ html,
   button {
     font-family: "Monaco";
     gap: 500px;
-
     border-radius: 12px;
     font-size: 16px;
     background-color: rgba(47, 149, 55, 0.328);
     color: rgb(0, 0, 0);
     border: 1px solid #027a10; /* Green */
-
+    width: 110%;
+ 
 }
 
 button:hover {
