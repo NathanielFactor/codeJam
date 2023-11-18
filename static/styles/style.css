@@ -230,3 +230,19 @@ button:active {
     box-shadow: 0 6px rgba(67, 113, 71, 0.774);
     transform: translateY(4px);
   }
+  .custom_table {
+    font-family: "Monaco";
+    font-size: 16px;
+    width: 100%; /* Set the width as needed */
+    border-collapse: collapse;
+}
+
+.custom_table th, .custom_table td {
+  padding-left: 10px;
+  padding-right: 10px;
+  border-bottom: 1px solid #ffffff;
+}
+
+.custom_table tr {
+    background-color: rgba(255, 255, 255, 0.506) !important;
+}
