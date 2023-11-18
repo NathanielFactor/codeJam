@@ -22,15 +22,16 @@
 }
 
 
-body {
+
+.left:before, .right:before {
   background-image: url("copy-space-italian-food-ingredients.jpg");
-  min-height: 100vh;
-  font-weight: 300;
-  font-size: 1.25rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  background-repeat: no-repeat;
+  content: "";
+  position: fixed;
+  height: 100%;
+  width: 100%;
 }
+
 
 .content {
   display: flex;
@@ -113,72 +114,76 @@ body {
             font-size: 22px;
         }
         body{
-            color: rgb(49, 47, 44);
+            color: antiquewhite;
         }
     </style>
 </head>
 
-<body background="copy-space-italian-food-ingredients.jpg">
+<style>
+        div.mycontainer {
+            width:100%;
+            overflow:auto;
+            }
+            div.mycontainer div {
+            width:50%;  
+            float:left;
+        }
 
-    <!--Title Heading-->
-    <div style="text-align: center;">
-            <img src="Superfoods.png" alt="Food Image" width="800" height="391">
-
+    body {
         
-        <form action="/action_page.php">
-    </div>
+        background-image: url("copy-space-italian-food-ingredients.jpg");
+        background-repeat: no-repeat;
+        background-position: right top;
+        background-attachment: scroll;
+        background-size: contain;
     
+    }
+</style>
+
+<body>
         
     <div class="mycontainer">
+              <!--Ingredient name and expiry dates-->
+            <h2>Enter Ingredients</h2>
+            <form action="/action_page.php">
+            <!--Ingredient names-->
+            <label for="ingredient">Ingredient:</label>
+            <input type="text" id="ingredient"
+            name="ingredient" placeholder="Type in an ingredient"><br><br>
 
-        <table>
+            <!--Expiry dates-->
+            <div>
+                <label for="expdate">Expiry date:</label>
+                <input type="text" id="expdate" expiry date="expdate" placeholder="Type in the expiry date">
+            </div>
 
-            <!--Column titles-->
-            <tr>
-                <th>Ingredient</th>
-                <th>Expiry date</th>
 
-            </tr>
-
-            <!--Input row-->
-            <tr>
-
-                <!--Type ingredient name column-->
-                <td>
-                    <label for="ingredient"></label>
-                    <input type="text" id="ingredient" name="ingredient" placeholder="Type in an ingredient...">
-                </td>
-                
-                <!--Select expiry date column-->
-                <td>
-                    <label for="expdate"></label>
-                    <input type="date" id="expdate" name="expdate">
-                </td>
-
-            </tr>
-
-        </table>
 
             
-        <input type="submit" value="Submit"> <!--submit button-->
-        <input type="reset"> <!--reset button-->
-        <button type="button">Generate Recipes</button> <!--generate recipe button-->
+            <input type="submit" value="Submit"> <!--submit button-->
+            <input type="reset"> <!--reset button-->
+            <!--<p> <p>-->
+            <button type="button">Generate Recipes</button> <!--generate recipe button-->
+            </form>
             
             
-        <div>
-            <h2>Possible recipes:</h2>
-            <ol>
-            <li>Salad</li>
-            <li>Cake</li>
-            <li>Pizza</li>
-            </ol>  
-        </div>
+            <div>
+              <h2>Possible recipes:</h2>
+              <ol>
+              <li>Salad</li>
+              <li>Cake</li>
+              <li>Pizza</li>
+              </ol>  
+            </div>
             
            
     </div>
 
         </form>
     
+
+
+
     
 
 </body>
