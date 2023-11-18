@@ -10,16 +10,24 @@
 <head>
     <meta charset="UTF-8">
     <title>CodeJam</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" type="text/css" href="style.css" />
 
 
+    <style>
+        html{
+            font-size: 22px;
+        }
+        body{
+            color: rgb(0, 0, 0);
+        }
+    </style>
 </head>
 
 <body>
     
         
     <br><br> 
-    <div class="mycontainer">
+    <div class="mycontainer" style="display: inline-block;">
         <form id="addIngr" style="display: inline-block;">
             <table style="display: inline-flex;">
                 <!--Column titles-->
@@ -53,15 +61,10 @@
                     <td style="border: none; text-align: left;"><button type="button" onclick="submitAdd()">Submit</button></td>
                 </tr>
             </table>
+   
         </form>
-        <table style="display: inline-flex;">
-
-            <!--Column title-->
-            <tr>
-                <th>Possible recipes</th>
-            </tr>
-           
-        </table>
+        
+      
     
 
         <form id="ingrList" style="display: none;" method="post" action="/add">
@@ -85,7 +88,56 @@
               <th width="75">Cooked!</th>
             </tr>
             
-          
+            
+            <tr>
+                <td>Chicken</td>
+                <td style="color: red;">2</td>
+                <td><input type="checkbox"
+                     name="12" 
+                     id=""></td>
+            </tr>
+            
+            <tr>
+                <td>Chicken</td>
+                <td style="color: red;">3</td>
+                <td><input type="checkbox"
+                     name="13" 
+                     id=""></td>
+            </tr>
+            
+            <tr>
+                <td>Tomato</td>
+                <td style="color: red;">4</td>
+                <td><input type="checkbox"
+                     name="14" 
+                     id=""></td>
+            </tr>
+            
+            
+            <tr>
+                <td>Banana</td>
+                <td>12</td>
+                <td><input type="checkbox"
+                     name="5" 
+                     id=""></td>
+            </tr>
+            
+            <tr>
+                <td>Banana</td>
+                <td>14</td>
+                <td><input type="checkbox"
+                     name="15" 
+                     id=""></td>
+            </tr>
+            
+            <tr>
+                <td>Onions</td>
+                <td>17</td>
+                <td><input type="checkbox"
+                     name="16" 
+                     id=""></td>
+            </tr>
+            
             <tr style="background-color: transparent;">
                 <td style="border: none;"><button type="button" onclick="updateIngredients()">Update Ingredients</button></td>
                 <td style="border: none;"><button type="button" onclick="updateRecipes()">Generate Recipes</button></td>
@@ -99,14 +151,83 @@
         
            
         <form method="post" action="/updateRecipes" id="updateRecipes"></form>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
+ 
+        <div class="content">
+            
+<link rel="stylesheet" type="text/css" href="/static/styles/style.css" />
+
+
+
+
+    
+
+        </div>
        
     </div>
+    <div class="mycontainer" style="display: inline-flex; vertical-align: top;">
+        <table style="display: inline-flex;">
+
+            <!--Column title-->
+            
+            <tr>
+                <th>Possible recipes</th>
+            </tr>
+            
+            
+            <tr>
+               <td>Chicken Basquaise</td>
+            </tr>
+        
+            
+            <tr>
+               <td>Chicken Congee</td>
+            </tr>
+        
+            
+            <tr>
+               <td>Chicken &amp; mushroom Hotpot</td>
+            </tr>
+        
+            
+            <tr>
+               <td>Brown Stew Chicken</td>
+            </tr>
+        
+            
+            <tr>
+               <td>Chicken Handi</td>
+            </tr>
+        
+            
+            <tr>
+               <td>Thai Green Curry</td>
+            </tr>
+        
+            
+            <tr>
+               <td>Callaloo Jamaican Style</td>
+            </tr>
+        
+            
+            <tr>
+               <td>Lasagna Sandwiches</td>
+            </tr>
+        
+            
+            <tr>
+               <td>Chivito uruguayo</td>
+            </tr>
+        
+            
+            <tr>
+               <td>Ratatouille</td>
+            </tr>
+        
+            
+           
+        </table>
+    </div>
+    
   
     <script>
       const form = document.querySelector("form");
