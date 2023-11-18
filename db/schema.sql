@@ -1,8 +1,9 @@
 DROP TABLE IF EXISTS ingredients;
 
-CREATE TABLE ingredients (
-    ingredient TEXT NOT NULL,
-    id INTEGER PRIMARY KEY,
-	expiry_data TEXT NOT NULL,
-	amount INTEGER PRIMARY KEY,
-);  
+CREATE TABLE ingredients (  
+   id INT NOT NULL AUTO_INCREMENT,
+   ingredient TEXT NOT NULL AUTO_INCREMENT,  
+   expiry TEXT NOT NULL AUTO_INCREMENT,  
+   amount INT NOT NULL AUTO_INCREMENT,
+   PRIMARY KEY ( id )  
+);
