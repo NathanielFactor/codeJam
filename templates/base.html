@@ -1,9 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<div class="content">
-    <h2 class="text-shadows">Waste2Taste</h2>
-</div>
+
 
 
 
@@ -12,6 +10,9 @@
     <title>CodeJam</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/style.css') }}" />
 
+    <div class="content">
+        <h2 class="text-shadows">Waste2Taste</h2>
+    </div>
 
     <style>
         html{
@@ -35,6 +36,7 @@
         </div>
         <div class="fridge" style="z-index: 1; background-color: white;">
             <div class="close" onclick="openDoor()"></div>
+            <br><br>
             <div>
                 <form style="display: inline-flex;" id="updateIng" action="/updateIngredients" method="post">
                 <table>
@@ -72,13 +74,16 @@
                         <td style="border: none;"><button type="button" onclick="updateIngredients()">Update Ingredients</button></td>
                         <td style="border: none;"><button type="button" onclick="updateRecipes()">Generate Recipes</button></td>
                     </tr>
-                
+                    
                   </table>
+                  
         
                 </form>
                 </div>
         </div>
-    
+        <div id="loading-container" style="display: none; width: 100vw; height: 100vh; position: absolute; top:0; background: rgba(255, 255, 255, 0.8); text-align: center; z-index: 10; opacity: 100;">
+            <img id="loading-image" style="height: 100vh; width: 100vw;" src="https://cdn.dribbble.com/users/655390/screenshots/2186909/loader-for-dribble.gif" alt="Loading..." style="width: 1500px; height: 800px;"> 
+        </div>
         
     
         <script>
@@ -279,6 +284,8 @@
         function updateRecipes() {
             var form = document.getElementById("updateRecipes");
             form.submit();
+            var loadingContainer = document.getElementById('loading-container');
+            loadingContainer.style.display = 'block';
         }
     </script>
     
