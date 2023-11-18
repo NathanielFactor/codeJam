@@ -57,7 +57,7 @@
 
         <form> 
         <input type="submit" value="Add Ingredient"> <!--submit button-->
-        <br>
+        <br><br><br>
     
         <script>
           const submit = document.getElementById("submit");
@@ -66,7 +66,7 @@
           });
         </script>
 
-        <input type="reset" value="Reset"> <!--reset button-->
+        
         <script>
           const reset = document.getElementById("reset");
           reset.addEventListener("click", function(e){
@@ -74,7 +74,7 @@
           });
         </script>
 
-        <button id="genRecipes" type="button">Generate Recipes</button> <!--generate recipe button-->
+        
         <script>
           const genRecipes = document.getElementById("genRecipes");
           genRecipes.addEventListener("click", function(e){
@@ -82,56 +82,35 @@
           });
         </script>
         </form>
-
-
-        <button type="button">Submit</button>
-        <button type="button">Reset</button> <!--reset button-->
-        <button type="button">Generate Recipes</button> <!--generate recipe button-->
         
         <table>
           <!--Table title-->
           <tr align="center">
-            <th>Previously entered items</th>
+            <th width="75"></th>
+            <th width="150">Previously entered items</th>
+            <th width="75"></th>
           </tr>
 
           <!--Column titles-->
           <tr>
             <th>Ingredient name</th>
-            <th>Expiry date</th>
             <th>Days left until expiration</th>
+            <th>Checklist</th>
           </tr>
 
         </table>
         
 
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
+        <br><br><br><br><br><br>
 
         <div>
             <table>
 
                 <!--Column title-->
                 <tr>
-                    <th width="10"></th> <!--left empty for the recipe number column-->
-                    <th width="200">Possible recipes</th>
+                    <th width="199">Possible recipes</th>
+                    <th width="1">Number of expiring ingredients used</th>
                 </tr>
-
-                <!--number of recipes, three for now and their links-->
-                <tr>
-                  <td>1.</td> <td>link</td>
-                </tr> <!--recipe 1-->
-
-                <tr>
-                  <td>2.</td> <td>link</td>
-                </tr> <!--recipe 2-->
-
-                <tr>
-                  <td>3.</td> <td>link</td>
-                </tr> <!--recipe 3-->
                
             </table>
 
