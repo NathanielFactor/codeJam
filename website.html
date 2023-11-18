@@ -22,16 +22,15 @@
 }
 
 
-
-.left:before, .right:before {
+body {
   background-image: url("copy-space-italian-food-ingredients.jpg");
-  background-repeat: no-repeat;
-  content: "";
-  position: fixed;
-  height: 100%;
-  width: 100%;
+  min-height: 100vh;
+  font-weight: 300;
+  font-size: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
-
 
 .content {
   display: flex;
@@ -114,76 +113,99 @@
             font-size: 22px;
         }
         body{
-            color: antiquewhite;
+            color: rgb(49, 47, 44);
         }
     </style>
 </head>
 
-<style>
-        div.mycontainer {
-            width:100%;
-            overflow:auto;
-            }
-            div.mycontainer div {
-            width:50%;  
-            float:left;
-        }
+<body background="copy-space-italian-food-ingredients.jpg">
 
-    body {
+    <!--Title Heading-->
+    <div style="text-align: center;">
+            <img src="Superfoods.png" alt="Food Image" width="800" height="391">
+
         
-        background-image: url("copy-space-italian-food-ingredients.jpg");
-        background-repeat: no-repeat;
-        background-position: right top;
-        background-attachment: scroll;
-        background-size: 2050px 1300px;
+        <form action="/action_page.php">
+    </div>
     
-    }
-</style>
-
-<body>
         
+    <br><br> 
     <div class="mycontainer">
-              <!--Ingredient name and expiry dates-->
-            <h2>Enter Ingredients</h2>
-            <form action="/action_page.php">
-            <!--Ingredient names-->
-            <label for="ingredient">Ingredient:</label>
-            <input type="text" id="ingredient"
-            name="ingredient" placeholder="Type in an ingredient"><br><br>
 
-            <!--Expiry dates-->
-            <div>
-                <label for="expdate">Expiry date:</label>
-                <input type="text" id="expdate" expiry date="expdate" placeholder="Type in the expiry date">
-            </div>
+        <table bgcolor="black" width="400">
 
+            <!--Column titles-->
+            <tr bgcolor="grey"> 
+                <th width="200">Ingredient</th>
+                <th width="200">Expiry date</th>
 
+            </tr>
+
+            <!--Input row-->
+            <tr bgcolor="lightgrey" align="center">
+
+                <!--Type ingredient name column-->
+                <td>
+                    
+                    <label for="ingredient"></label>
+                    <input type="text" id="ingredient" name="ingredient" placeholder="Type in an ingredient...">
+                </td>
+                
+                <!--Select expiry date column-->
+                <td>
+                    <label for="expdate"></label>
+                    <input type="date" id="expdate" name="expdate">
+                </td>
+
+            </tr>
+
+        </table>
 
             
-            <input type="submit" value="Submit"> <!--submit button-->
-            <input type="reset"> <!--reset button-->
-            <!--<p> <p>-->
-            <button type="button">Generate Recipes</button> <!--generate recipe button-->
-            </form>
-            
-            
-            <div>
-              <h2>Possible recipes:</h2>
-              <ol>
-              <li>Salad</li>
-              <li>Cake</li>
-              <li>Pizza</li>
-              </ol>  
-            </div>
+        <input type="submit" value="Submit"> <!--submit button-->
+        <input type="reset"> <!--reset button-->
+        <button type="button">Generate Recipes</button> <!--generate recipe button-->
+           
+        <br><br>
+
+        <div>
+            <table>
+
+                <!--Column title-->
+                <tr>
+                    <th></th> <!--left empty for the recipe number column-->
+                    <th>Possible recipes</th>
+                </tr>
+
+                <!--Links to recipes in order or priority?-->
+
+                <tr>
+                    <td>
+
+
+                    </td>
+                </tr>
+               
+            </table>
+
+        
+        </div>
+
+
+        <div>
+            <h2>Possible recipes:</h2>
+            <ol>
+            <li>Salad</li>
+            <li>Cake</li>
+            <li>Pizza</li>
+            </ol>  
+        </div>
             
            
     </div>
 
         </form>
     
-
-
-
     
 
 </body>
