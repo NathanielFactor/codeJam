@@ -1,18 +1,17 @@
-
 <!DOCTYPE html>
 <html lang="en">
+
+<div class="content">
+    <h2 class="text-shadows">LET THEM COOOK</h2>
+</div>
 
 
 
 <head>
-
-    <div class="content">
-        <h2 class="text-shadows">Let Them COOK</h2>
-    </div>
-
     <meta charset="UTF-8">
     <title>CodeJam</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/style.css') }}" />
+
 
     <style>
         html{
@@ -20,11 +19,8 @@
         }
         body{
             color: rgb(0, 0, 0);
-            background-image: url("{{ url_for('static', filename='images/fresh-colourful-ingredients-mexican-cuisine.jpg') }}");
         }
     </style>
-
-
 </head>
 
 <body>
@@ -32,18 +28,18 @@
         
     <br><br> 
     <div class="mycontainer">
-        <form id="add" action="/add" method="POST">
-            <table>
+        <form id="addIngr" style="display: inline-block;">
+            <table style="display: inline-flex;">
                 <!--Column titles-->
                 <tr> 
                     <th width="200">Ingredient</th>
                     <th width="200">Expiry date</th>
-
+    
                 </tr>
-
+    
                 <!--Input row-->
                 <tr align="center">
-
+    
                     <!--Type ingredient name column-->
                     <td>
                         <label for="ingredient"></label>
@@ -55,43 +51,175 @@
                         <label for="expdate"></label>
                         <input type="date" id="expdate" name="expdate">
                     </td>
-
                 </tr>
-
+            </table>
+            <br>
+            <table>
+                <tr style="background-color: transparent;">
+                    <td style="border: none; text-align: left;"><button type="submit">Add Ingredient</button></td> 
+                </tr>
+                <tr style="background-color: transparent;">
+                    <td style="border: none; text-align: left;"><button type="button" onclick="submitAdd()">Submit</button></td>
+                </tr>
             </table>
         </form>
-        <form id="update" method="POST" action="/updateRecipes" style="display: hidden;"></form>
+        <table style="display: inline-flex;">
 
-    
-
-        <button type="button" onclick="submitAdd()">Submit</button>
-        <button type="button">Reset</button> <!--reset button-->
-        <button type="button" onclick="submitUpdate()">Generate Recipes</button> <!--generate recipe button-->
-        <div class="content">
-            {% block content %} {% endblock %}
-        </div>
+            <!--Column title-->
+            {% if data %}
+            <tr>
+                <th>Possible recipes</th>
+            </tr>
+            {% endif %}
+            {% for recipe in data %}
+            <tr>
+               <td>{{ recipe }}</td>
+            </tr>
+        
+            {% endfor %}
            
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-             
-    </div>
- 
-
+        </table>
     
+
+        <form id="ingrList" style="display: none;" method="post" action="/add">
+            <input name="iList" type="text" id="iList" value="">
+            <input name="eList" type="text" id="eList" value="">
+        </form>
+        <br>
+        
+        <br><br><br><br><br>
+        <form style="display: inline-flex;" id="updateIng" action="/updateIngredients" method="post">
+        <table>
+            <!--Table title-->
+            <tr align="center">
+              <th colspan="3">Previously entered items</th>
+            </tr>
+        
+            <!--Column titles-->
+            <tr>
+              <th width="150">Ingredient name</th>
+              <th width="75">Days left</th>
+              <th width="75">Cooked!</th>
+            </tr>
+            
+            {% for ingredient in exp%}
+            <tr>
+                <td>{{ ingredient }}</td>
+                <td style="color: red;">{{ eDays[loop.index-1] }}</td>
+                <td><input type="checkbox"
+                     name="{{ e_ids[loop.index-1] }}" 
+                     id=""></td>
+            </tr>
+            {% endfor %}
+            {% for ingredient in post%}
+            <tr>
+                <td>{{ ingredient }}</td>
+                <td>{{ days[loop.index-1] }}</td>
+                <td><input type="checkbox"
+                     name="{{ i_ids[loop.index-1] }}" 
+                     id=""></td>
+            </tr>
+            {% endfor %}
+            <tr style="background-color: transparent;">
+                <td style="border: none;"><button type="button" onclick="updateIngredients()">Update Ingredients</button></td>
+                <td style="border: none;"><button type="button" onclick="updateRecipes()">Generate Recipes</button></td>
+            </tr>
+        
+          </table>
+
+        </form>
+         
+        <br>
+        
+           
+        <form method="post" action="/updateRecipes" id="updateRecipes"></form>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <div class="content">
+            {% block content %}{% endblock %}
+        </div>
+       
+    </div>
+  
     <script>
-        function submitAdd() {
-            var form = document.getElementById("add");
-            form.submit();
-        }
-        function submitUpdate() {
-            var form = document.getElementById("update");
-            form.submit();
+      const form = document.querySelector("form");
+      const tbody = document.querySelector("tbody");
+      const table = document.querySelector("table");
+
+      function validateDate(date) {
+            // Get the input element
+
+            // Get the entered date value
+            var enteredDate = new Date(date);
+            // Get the current date
+            var currentDate = new Date();
+            // Compare the entered date with the current date
+            return enteredDate >= currentDate;
         }
 
+      function onAddWebsite(e) {
+        e.preventDefault();
+        const ingredient = document.getElementById("ingredient").value;
+        var expdate = document.getElementById("expdate").value;
+
+
+        if (ingredient=="" || expdate==""){
+            alert("Please fill in all fields");
+        } else if (!validateDate(expdate)){
+            alert("Please enter a valid date");
+        }
+        else{
+            document.getElementById("iList").value += ingredient + ",";
+            document.getElementById("eList").value += expdate + ",";
+            tbody.innerHTML += `
+            <tr>
+                <td>${ingredient}</td>
+                <td>${expdate}</td>
+                <td><button class = "deleteBtn">Delete</button></td>
+            </tr>
+            `;
+        }
+
+      }
+
+      function onDeleteRow(e) {
+        if (!e.target.classList.contains("deleteBtn")) {
+          return;
+        }
+        const btn = e.target;
+        btn.closest("tr").remove();
+      }
+      form.addEventListener("submit", onAddWebsite);
+      document.addEventListener("keypress", function (e) {
+        if (e.key === "Enter") {
+          onAddWebsite(e);
+        }
+      });
+      table.addEventListener("click", onDeleteRow);
     </script>
 
+    <script>
+
+        function submitAdd() {
+            var form = document.getElementById("ingrList");
+            form.submit();
+        }
+        function updateIngredients() {
+            var form = document.getElementById("updateIng");
+            form.submit();
+        }
+        function updateRecipes() {
+            var form = document.getElementById("updateRecipes");
+            form.submit();
+        }
+    </script>
+    
+
 </body>
+
+
+ 

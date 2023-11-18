@@ -3,32 +3,8 @@
 {% block content %}
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/style.css') }}" />
 
-    <table>
-    <tr>
-        <th width="200">Ingredients</th>
-    </tr>
-    {% for ingredient in post %}
-    <tr>
-        <td>{{ ingredient['ingredient'] }}</td>
-        <td>{{ ingredient['expiry'] }}</td>
-    </tr>
-    {% endfor %}
-        
-    </table>
 
-    <table>
 
-        <!--Column title-->
-        <tr>
-            <th width="200">Possible recipes</th>
-        </tr>
-        {% for recipe in data %}
-        <tr>
-           <td>{{ recipe }}</td>
-        </tr>
-    
-        {% endfor %}
-       
-    </table>
+
     
 {% endblock %}

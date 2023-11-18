@@ -2,7 +2,7 @@
 <html lang="en">
 
 <div class="content">
-    <h2 class="text-shadows">Let Them COOK</h2>
+    <h2 class="text-shadows">LET THEM COOOK</h2>
 </div>
 
 
@@ -10,7 +10,8 @@
 <head>
     <meta charset="UTF-8">
     <title>CodeJam</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/style.css') }}" />
+
 
     <style>
         html{
@@ -27,96 +28,93 @@
         
     <br><br> 
     <div class="mycontainer">
-
-        <table>
-            <!--Column titles-->
-            <tr> 
-                <th width="200">Ingredient</th>
-                <th width="200">Expiry date</th>
-
-            </tr>
-
-            <!--Input row-->
-            <tr align="center">
-
-                <!--Type ingredient name column-->
-                <td>
-                    <label for="ingredient"></label>
-                    <input type="text" id="ingredient" name="ingredient" placeholder="Type in an ingredient...">
-                </td>
-                
-                <!--Select expiry date column-->
-                <td>
-                    <label for="expdate"></label>
-                    <input type="date" id="expdate" name="expdate">
-                </td>
-
-            </tr>
-
-        </table>
-
-        <form> 
-        <input type="submit" value="Add Ingredient"> <!--submit button-->
-        <br><br><br>
+        <form id="addIngr" style="display: inline-block;">
+            <table style="display: inline-flex;">
+                <!--Column titles-->
+                <tr> 
+                    <th width="200">Ingredient</th>
+                    <th width="200">Expiry date</th>
     
-        <script>
-          const submit = document.getElementById("submit");
-          submit.addEventListener("click", function(e){
-
-          });
-        </script>
-
-        
-        <script>
-          const reset = document.getElementById("reset");
-          reset.addEventListener("click", function(e){
-
-          });
-        </script>
-
-        
-        <script>
-          const genRecipes = document.getElementById("genRecipes");
-          genRecipes.addEventListener("click", function(e){
-
-          });
-        </script>
-        </form>
-        
-        <table>
-          <!--Table title-->
-          <tr align="center">
-            <th width="75"></th>
-            <th width="150">Previously entered items</th>
-            <th width="75"></th>
-          </tr>
-
-          <!--Column titles-->
-          <tr>
-            <th>Ingredient name</th>
-            <th>Days left until expiration</th>
-            <th>Checklist</th>
-          </tr>
-
-        </table>
-        
-
-        <br><br><br><br><br><br>
-
-        <div>
-            <table>
-
-                <!--Column title-->
-                <tr>
-                    <th width="199">Possible recipes</th>
-                    <th width="1">Number of expiring ingredients used</th>
                 </tr>
-               
+    
+                <!--Input row-->
+                <tr align="center">
+    
+                    <!--Type ingredient name column-->
+                    <td>
+                        <label for="ingredient"></label>
+                        <input type="text" id="ingredient" name="ingredient" placeholder="Type in an ingredient...">
+                    </td>
+                    
+                    <!--Select expiry date column-->
+                    <td>
+                        <label for="expdate"></label>
+                        <input type="date" id="expdate" name="expdate">
+                    </td>
+                </tr>
             </table>
+            <br>
+            <table>
+                <tr style="background-color: transparent;">
+                    <td style="border: none; text-align: left;"><button type="submit">Add Ingredient</button></td> 
+                </tr>
+                <tr style="background-color: transparent;">
+                    <td style="border: none; text-align: left;"><button type="button" onclick="submitAdd()">Submit</button></td>
+                </tr>
+            </table>
+        </form>
+        <table style="display: inline-flex;">
 
+            <!--Column title-->
+            <tr>
+                <th>Possible recipes</th>
+            </tr>
+           
+        </table>
+    
+
+        <form id="ingrList" style="display: none;" method="post" action="/add">
+            <input name="iList" type="text" id="iList" value="">
+            <input name="eList" type="text" id="eList" value="">
+        </form>
+        <br>
         
-        </div>
-             
+        <br><br><br><br><br>
+        <form style="display: inline-flex;" id="updateIng" action="/updateIngredients" method="post">
+        <table>
+            <!--Table title-->
+            <tr align="center">
+              <th colspan="3">Previously entered items</th>
+            </tr>
+        
+            <!--Column titles-->
+            <tr>
+              <th width="150">Ingredient name</th>
+              <th width="75">Days left</th>
+              <th width="75">Cooked!</th>
+            </tr>
+            
+          
+            <tr style="background-color: transparent;">
+                <td style="border: none;"><button type="button" onclick="updateIngredients()">Update Ingredients</button></td>
+                <td style="border: none;"><button type="button" onclick="updateRecipes()">Generate Recipes</button></td>
+            </tr>
+        
+          </table>
+
+        </form>
+         
+        <br>
+        
+           
+        <form method="post" action="/updateRecipes" id="updateRecipes"></form>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+       
     </div>
   
     <script>
@@ -124,19 +122,40 @@
       const tbody = document.querySelector("tbody");
       const table = document.querySelector("table");
 
+      function validateDate(date) {
+            // Get the input element
+
+            // Get the entered date value
+            var enteredDate = new Date(date);
+            // Get the current date
+            var currentDate = new Date();
+            // Compare the entered date with the current date
+            return enteredDate >= currentDate;
+        }
+
       function onAddWebsite(e) {
         e.preventDefault();
         const ingredient = document.getElementById("ingredient").value;
-        const expdate = document.getElementById("expdate").value;
+        var expdate = document.getElementById("expdate").value;
 
 
-        tbody.innerHTML += `
-          <tr>
-            <td>${ingredient}</td>
-            <td>${expdate}</td>
-            <td><button class = "deleteBtn">Delete</button></td>
-          </tr>
-        `;
+        if (ingredient=="" || expdate==""){
+            alert("Please fill in all fields");
+        } else if (!validateDate(expdate)){
+            alert("Please enter a valid date");
+        }
+        else{
+            document.getElementById("iList").value += ingredient + ",";
+            document.getElementById("eList").value += expdate + ",";
+            tbody.innerHTML += `
+            <tr>
+                <td>${ingredient}</td>
+                <td>${expdate}</td>
+                <td><button class = "deleteBtn">Delete</button></td>
+            </tr>
+            `;
+        }
+
       }
 
       function onDeleteRow(e) {
@@ -147,10 +166,29 @@
         btn.closest("tr").remove();
       }
       form.addEventListener("submit", onAddWebsite);
+      document.addEventListener("keypress", function (e) {
+        if (e.key === "Enter") {
+          onAddWebsite(e);
+        }
+      });
       table.addEventListener("click", onDeleteRow);
     </script>
 
-    
+    <script>
+
+        function submitAdd() {
+            var form = document.getElementById("ingrList");
+            form.submit();
+        }
+        function updateIngredients() {
+            var form = document.getElementById("updateIng");
+            form.submit();
+        }
+        function updateRecipes() {
+            var form = document.getElementById("updateRecipes");
+            form.submit();
+        }
+    </script>
     
 
 </body>

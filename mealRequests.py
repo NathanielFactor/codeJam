@@ -86,20 +86,25 @@ def get_suitability(meal, user_ingredients, expiring):
         suitability = suitability/i_length
         print("previous " + str(suitability))
     if expire_length != 0:
-        suitability = suitability*0.3 + (expire_num/expire_length)*0.7
+        suitability = suitability*0.05 + (expire_num/expire_length)*0.95
         print("after " + str(suitability))
     return suitability
 
 def rank_meals(meals, user_ingredients, expiring):
-    ranked_meals = [[meal, get_suitability(meal, user_ingredients, expiring)] for meal in meals]
-    ranked_meals.sort(key=lambda x: x[1], reverse=True)
-    return_array = [ranked_meals[i][0] for i in range(0,10)]
-    return return_array
+    if (user_ingredients == []):
+        return []
+    else:
+        ranked_meals = [[meal, get_suitability(meal, user_ingredients, expiring)] for meal in meals]
+        ranked_meals.sort(key=lambda x: x[1], reverse=True)
+        if len(ranked_meals) > 10:
+            ranked_meals = ranked_meals[:10]
+        return_array = [ranked_meals[i][0] for i in range(len(ranked_meals))]
+        return return_array
 
-def get_meals_by_expire(expiring):
+def get_meals_by_ingredients(ingredients):
     meals = []
     ids = []
-    for ingredient in expiring:
+    for ingredient in ingredients:
         temp = get_meals_by_ingredient(ingredient)
         for meal in temp:
             id = meal.get_id()

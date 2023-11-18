@@ -13,6 +13,7 @@ app = Flask(__name__)
 
 
 recipes = []
+recipeIds =[]
 def shortest_date_interval(date_str1, date_str2):
     date1 = datetime.strptime(date_str1, '%Y-%m-%d')
     date2 = datetime.strptime(date_str2, '%Y-%m-%d')
@@ -31,46 +32,94 @@ def index():
     conn = get_db_connection()
     ingredients = conn.execute('SELECT * FROM ingredients').fetchall()
     conn.close()
-    return render_template('index.html', post=ingredients, data=recipes)
+    collection = []
+    exp_ing = []
+    ret_ing = []
+    exp_days = []
+    ret_days = []
+    e_ids = []
+    i_ids = []
+    for item in ingredients:
+        ing = item['ingredient']
+        expiry = item['expiry']
+        id = item['id']
+        day = shortest_date_interval(datetime.today().strftime('%Y-%m-%d'), expiry)
+        collection.append([ing, day, id])
+    collection.sort(key=lambda x: x[1], reverse=False)
+    if len(collection) > 10:
+        collection = collection[:10]
+    for datapoint in collection:
+        if datapoint[1] <= 5:
+            exp_ing.append(datapoint[0])
+            exp_days.append(datapoint[1])
+            e_ids.append(datapoint[2])
+        else:
+            ret_ing.append(datapoint[0])
+            ret_days.append(datapoint[1])
+            i_ids.append(datapoint[2])  
+    return render_template('index.html', post=ret_ing, days=ret_days, exp=exp_ing, eDays=exp_days, data=recipes, e_ids=e_ids, i_ids=i_ids)
 
 @app.route('/add', methods = ['POST'])
 def add():
     conn =get_db_connection()
     cur = conn.cursor()
-    ingredient =  request.form['ingredient']
-    expiry = request.form['expdate']
-    cur.execute("INSERT INTO ingredients (ingredient, expiry) VALUES (?, ?)",
-           (ingredient, expiry)
-           )
-
-    #db stuff
-    #cur.execute("INSERT INTO ingredients (ingredient, expiry, amount) VALUES (?, ?, ?)",
-    #       ('Chicken', 0, 1)
-    #       )
+    ingredients =  request.form['iList']
+    expiries = request.form['eList']
+    ingredient_list = ingredients.split(',')
+    expiry_list = expiries.split(',')
+    for i in range(len(ingredient_list)):
+        ingredient = ingredient_list[i]
+        expiry = expiry_list[i]
+        if ingredient != "" and expiry != "":
+            cur.execute("INSERT INTO ingredients (ingredient, expiry) VALUES (?, ?)",
+                (ingredient, expiry)
+                )
 
     conn.commit()
-    conn.close()
+    recipes.clear()
     return redirect(url_for('index'))
 
-@app.route('/clearTable', methods = ['POST'])
-def remove():
-    conn = get_db_connection()
+@app.route('/updateIngredients', methods = ['POST'])
+def updateIngredients():
+    conn = get_db_connection()  
     cur = conn.cursor()
-    cur.execute("DELETE FROM ingredients  ")
-    conn.commit()
+    ingredients = conn.execute('SELECT * FROM ingredients').fetchall()
+    print(ingredients)
+    id_list = []
+    for item in ingredients:
+        id_list.append(str(item['id']))
+    for id in id_list:
+        print(id)
+        try:
+            deleted = request.form[id]
+            if deleted == 'on':
+                cur.execute("DELETE FROM ingredients WHERE id = ?", (id,))
+                conn.commit()
+        except:
+            pass
     conn.close()
+    recipes.clear()
     return redirect(url_for('index'))
+
 
 @app.route('/updateRecipes', methods = ['POST'])
 def updateRecipes():
     conn = get_db_connection()
     ingredients = conn.execute('SELECT * FROM ingredients').fetchall()
     i_list = []
-
+    e_list = []
     for item in ingredients:
         i_list.append(item['ingredient'])
-    meals = get_meals_by_expire(i_list)
-    ranked_meals = rank_meals(meals, i_list, i_list)
+        expiry = item['expiry']
+        day = shortest_date_interval(datetime.today().strftime('%Y-%m-%d'), expiry)
+        if day <= 5:
+            e_list.append(item['ingredient'])
+    print(i_list)
+    meals = get_meals_by_ingredients(e_list)
+    if meals == []:
+        meals = get_meals_by_ingredients(i_list)
+
+    ranked_meals = rank_meals(meals, i_list, e_list)
     names = get_meal_names(ranked_meals)
     if names != []:
         for name in names:

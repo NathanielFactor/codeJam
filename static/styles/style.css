@@ -16,7 +16,7 @@ html,
   
 
   body {
-    background-image: url("fresh-colourful-ingredients-mexican-cuisine.jpg");
+    background-image: url("../images/fresh-colourful-ingredients-mexican-cuisine.jpg");
     background-repeat: no-repeat;
     background-size: 1600px 900px;
 
@@ -97,16 +97,19 @@ html,
 
   table {
     font-family: "Monaco";
-    width: 40%;
+    display: inline-block;
+    
   }
 
   td {
     text-align: center;
-    max-height: 50px;
     vertical-align: middle;
   }
 
   th, td {
+    padding-left: 15px;
+    padding-right: 15px;
+    min-width: 200px;
     border-bottom: 1px solid #cd8787;
   }
 
