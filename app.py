@@ -43,7 +43,7 @@ def index():
         ing = item['ingredient']
         expiry = item['expiry']
         id = item['id']
-        day = shortest_date_interval(datetime.today().strftime('%Y-%m-%d'), expiry)
+        day = shortest_date_interval(datetime.today().strftime("%Y-%m-%d"), expiry)
         collection.append([ing, day, id])
     collection.sort(key=lambda x: x[1], reverse=False)
     if len(collection) > 10:
@@ -65,18 +65,24 @@ def add():
     cur = conn.cursor()
     ingredients =  request.form['iList']
     expiries = request.form['eList']
-    ingredient_list = ingredients.split(',')
-    expiry_list = expiries.split(',')
-    for i in range(len(ingredient_list)):
-        ingredient = ingredient_list[i]
-        expiry = expiry_list[i]
-        if ingredient != "" and expiry != "":
-            cur.execute("INSERT INTO ingredients (ingredient, expiry) VALUES (?, ?)",
-                (ingredient, expiry)
-                )
+    print(ingredients)
+    print(expiries)
+    if ingredients != "undefined" and expiries != "undefined":
+        print(ingredients)
+        print(expiries)
+        ingredient_list = ingredients.split(',')
+        expiry_list = expiries.split(',')
+        for i in range(len(ingredient_list)):
+            ingredient = ingredient_list[i]
+            expiry = expiry_list[i]
+            if ingredient != "" and expiry != "":
+                cur.execute("INSERT INTO ingredients (ingredient, expiry) VALUES (?, ?)",
+                    (ingredient, expiry)
+                    )
 
-    conn.commit()
+        conn.commit()
     recipes.clear()
+    conn.close()
     return redirect(url_for('index'))
 
 @app.route('/updateIngredients', methods = ['POST'])
@@ -104,6 +110,7 @@ def updateIngredients():
 
 @app.route('/updateRecipes', methods = ['POST'])
 def updateRecipes():
+
     conn = get_db_connection()
     ingredients = conn.execute('SELECT * FROM ingredients').fetchall()
     i_list = []
