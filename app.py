@@ -12,6 +12,7 @@ def get_db_connection():
 def index():
     conn = get_db_connection()
     ingredients = conn.execute('SELECT * FROM ingredients').fetchall()
+    print(ingredients)
     conn.close()
     return render_template('index.html', post=ingredients)
 
