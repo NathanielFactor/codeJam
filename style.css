@@ -94,10 +94,9 @@ html,
   }
 
   table {
-    
+    font-family: "Monaco";
     display: inline-block;
     border-radius: 12px;
-    
   }
 
   td {
