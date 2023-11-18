@@ -61,6 +61,7 @@ def index():
 
 @app.route('/add', methods = ['POST'])
 def add():
+    redirect('add.html')
     conn =get_db_connection()
     cur = conn.cursor()
     ingredients =  request.form['iList']
