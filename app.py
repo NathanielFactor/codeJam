@@ -144,7 +144,8 @@ def updateRecipes():
 @app.route('/loadRecipe', methods = ['POST'])
 def load():
     returnRec.clear()
-    recipe = get_recipe_by_name(request.form['displayRecipe'])
+    name = get_first_two_words(request.form['displayRecipe'])
+    recipe = get_recipe_by_name(name)
     returnRec.append(recipe.get_meal())
     returnRec.append(recipe.get_category())
     returnRec.append(recipe.get_instructions())

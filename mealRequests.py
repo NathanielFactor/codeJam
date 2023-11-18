@@ -1,6 +1,7 @@
 import requests
 from urllib import parse
 from fuzzywuzzy import fuzz
+import random
 
 
 from mealObjects import Category, Meal, Recipe, Area
@@ -21,8 +22,16 @@ def get_meals_by_category(category):
 
     return meals
 
-def get_recipe_by_name(meal):
-    url = 'https://www.themealdb.com/api/json/v1/1/search.php?s=' + parse.quote(meal)
+def get_first_two_words(input_string):
+    words = input_string.split()
+    if len(words) >= 2:
+        print(words[0] + " " + words[1])
+        return words[0] + " " + words[1]
+    else:
+        return input_string
+
+def get_recipe_by_name(name):
+    url = 'https://www.themealdb.com/api/json/v1/1/search.php?s=' + parse.quote(name)
     recipe = None
     try:
         data = requests.get(url).json()   
@@ -65,14 +74,27 @@ def get_ingredients_by_id(id):
         print("JSON format error")
     return ingredients
 
+def get_id_by_name(name):
+    print(name + "HEYYYYYETAWPYGWPAHPUGP")
+    url = "https://www.themealdb.com/api/json/v1/1/search.php?s=" + get_first_two_words(name)
+    try:
+        data = requests.get(url).json()
+        for item in data['meals']:
+            return item['idMeal']
+    except (ValueError, KeyError, TypeError):
+        print("JSON format error")
+    return None
+
 def get_recipe_by_id(id):
     url = "https://www.themealdb.com/api/json/v1/1/lookup.php?i=" + id
+    print(id + "HELLOOOOO")
     try:
         data = requests.get(url).json()
         recipe = Recipe(id, data['strMeal'], data['strCategory'], data['strInstructions'], data['strMealThumb'])
+        return recipe
     except (ValueError, KeyError, TypeError):
         print("JSON format error")
-    return recipe
+    return None
 
 def compare(str1, str2, threshold=70):
     similarity_score = fuzz.partial_ratio(str1, str2)
@@ -94,10 +116,8 @@ def get_suitability(meal, user_ingredients, expiring):
                 break
     if i_length != 0:
         suitability = suitability/i_length
-        print("previous " + str(suitability))
     if expire_length != 0:
         suitability = suitability*0.05 + (expire_num/expire_length)*0.95
-        print("after " + str(suitability))
     return suitability
 
 def rank_meals(meals, user_ingredients, expiring):
@@ -118,10 +138,20 @@ def get_meals_by_ingredients(ingredients):
         temp = get_meals_by_ingredient(ingredient)
         for meal in temp:
             id = meal.get_id()
+            print(id + "HEY")
             if id not in ids:
                 meals.append(meal)
                 ids.append(id)
-    return meals
+    m_len = len(meals)
+    temporary = []
+    tempo_id =[]
+    if m_len >= 13:
+        for i in range(13):
+            t_int = random.randint(0, m_len-1)
+            if ids[t_int] not in tempo_id:
+                temporary.append(meals[t_int])
+                tempo_id.append(ids[t_int])
+    return temporary
 
 def get_meal_names(meals):
     names = []
