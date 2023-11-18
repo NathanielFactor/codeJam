@@ -115,7 +115,6 @@ html,
 
   tr {
     border-radius: 12px;
-    background-color: rgba(255, 255, 255, 0.747)
   }
 
   tr:hover {background-color: rgba(229, 162, 157, 0.56);}
@@ -156,29 +155,11 @@ button:active {
     transform: translateY(4px);
   }
 
-  .note_table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 20px;
-    background: url('https://i.stack.imgur.com/kb0Zm.jpg') no-repeat center center fixed;
-    background-size: cover;
-}
-
-.note_table th, .note_table td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: left;
-}
-
-.note_table th {
-    background-color: #4CAF50;
-    color: white;
-}
-
-.note_table tr:nth-child(even) {
-    background-color: #f9f9f9;
-}
-
-.note_table tr:hover {
-    background-color: #e6f7ff;
-}
+  .hide {
+    display: none;
+  }
+  
+  .mycontainer:hover + .hide {
+    display: block;
+    color: red;
+  }

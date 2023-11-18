@@ -6,6 +6,7 @@
 </div>
 
 
+
 <head>
     <meta charset="UTF-8">
     <title>CodeJam</title>
@@ -13,6 +14,9 @@
 
 
     <style>
+        .table-pointer {
+            cursor: pointer;
+        }  
         html{
             font-size: 22px;
         }
@@ -23,17 +27,16 @@
 </head>
 
 <body>
-
+    
         
     <br><br> 
-    
     <div class="mycontainer" style="display: inline-block;">
         <form id="addIngr" style="display: inline-block;">
             <table style="display: inline-flex;">
                 <!--Column titles-->
                 <tr> 
-                    <th width="200">Ingredient</th>
-                    <th width="200">Expiry date</th>
+                    <th width="300">Ingredient</th>
+                    <th width="300">Expiry date</th>
     
                 </tr>
     
@@ -83,9 +86,9 @@
         
             <!--Column titles-->
             <tr>
-              <th width="150">Ingredient name</th>
-              <th width="75">Days left</th>
-              <th width="75">Cooked!</th>
+              <th width="100">Ingredient name</th>
+              <th width="50">Days left</th>
+              <th width="50">Cooked!</th>
             </tr>
             
             
@@ -140,29 +143,10 @@
             
             <tr style="background-color: transparent;">
                 <td style="border: none;"><button type="button" onclick="updateIngredients()">Update Ingredients</button></td>
-                <td style="border: none;"><button type="button" onclick="showLoadingIcon()">Generate Recipes</button></td>
+                <td style="border: none;"><button type="button" onclick="updateRecipes()">Generate Recipes</button></td>
             </tr>
         
           </table>
-
-          <div id="loading-container" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(255, 255, 255, 0.8); text-align: center;">
-            <img id="loading-image" src="https://cdn.dribbble.com/users/655390/screenshots/2186909/loader-for-dribble.gif" alt="Loading..." style="width: 1550px; height: 800px;"> 
-        </div>
-        
-        
-        <script>
-            function showLoadingIcon() {
-                var loadingContainer = document.getElementById('loading-container');
-                loadingContainer.style.display = 'block';
-        
-                setTimeout(function () {
-                    loadingContainer.style.display = 'none';
-                }, 5000);
-            }
-        </script>
-        
-        
-        
 
         </form>
          
@@ -184,9 +168,7 @@
        
     </div>
     <div class="mycontainer" style="display: inline-flex; vertical-align: top;">
-        <table style="display: inline-flex;">
-
-
+        <table class="table-pointer">
             <!--Column title-->
             
             <tr>
@@ -243,17 +225,11 @@
                <td>Ratatouille</td>
             </tr>
         
-            
         </table>
-
     </div>
-    <div id="possibleRecipes" class="mycontainer" style="display: none; vertical-align: top;">
-            <!--Column title-->
-            <p>Possible recipes</p>
-            <data>  
 
-            </data>
-    </div>
+
+    
     
   
     <script>
@@ -327,12 +303,9 @@
             var form = document.getElementById("updateRecipes");
             form.submit();
         }
-
-        function showPossibleRecipes() {
-            var possibleRecipesTable = document.getElementById('possibleRecipes');
-            possibleRecipesTable.style.display = 'inline-block';
-        }
     </script>
+
+
     
 
 </body>
