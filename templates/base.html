@@ -8,7 +8,7 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/style.css') }}" />
 
     <div class="content">
-        <h2 class="text-shadows">Waste2Taste</h2>
+        <h2 class="text-shadows" style="font-family: Lucida Console, monospace;">Waste 2 Taste</h2>
     </div>
 
     <style>
@@ -22,7 +22,9 @@
 </head>
 
 <body>
-      
+    
+    <iframe style="margin: 0 auto; border-radius:12px" src="https://open.spotify.com/embed/playlist/6abvvGTDj4WuFRNDMsHsw8?utm_source=generator&theme=0" width="30%" height="75" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+   
     <br><br> 
     
     <div class="mycontainer" style="display: inline-block;">
@@ -35,7 +37,7 @@
             <div class="handle2"></div>
         </div>
         <div class="fridge" style="z-index: 1; background-color: white;">
-            <div class="close" onclick="openDoor()"></div>
+            <div class="close" onclick="closeDoor()"></div>
             <br><br>
             <div>
                 <form style="display: inline-flex;" id="updateIng" action="/updateIngredients" method="post">
@@ -93,40 +95,51 @@
             function openDoor() {
                 var fridge = document.querySelector('.fridge');
                 var door = document.querySelector('.door');
-    
-                // Toggle the 'open' class to rotate the door
-                fridge.classList.toggle('open');
-                door.classList.toggle('open');
+
+                fridge.classList.add('open');
+                door.classList.add('open');
+
+                
+            }
+
+            function closeDoor(){
+                var fridge = document.querySelector('.fridge');
+                var door = document.querySelector('.door');
+
+                fridge.classList.remove('open');
+                door.classList.remove('open');
             }
         </script>
     
         <div style="margin-left: 400px;">
         <form id="addIngr" style="display: inline-block;">
-            <table id="table" style="display: inline-flex;">
-                <!--Column titles-->
-                
-                <tbody id="tbody">
-                <tr> 
-                    <th width="200">Ingredient</th>
-                    <th colspan="2" width="240">Expiry date</th>
-                </tr>
-                <!--Input row-->
-                <tr align="center">
-    
-                    <!--Type ingredient name column-->
-                    <td>
-                        <label for="ingredient"></label>
-                        <input type="text" id="ingredient" name="ingredient" placeholder="Type in an ingredient...">
-                    </td>
+            <div class="wrapper" style="border-radius: 20px/20px; overflow: hidden;">
+                <table id="table" style="display: inline-flex;">
+                    <!--Column titles-->
                     
-                    <!--Select expiry date column-->
-                    <td colspan="2" width="240">
-                        <label for="expdate"></label>
-                        <input type="date" id="expdate" name="expdate">
-                    </td>
-                </tr>
-            </tbody>
-            </table>
+                    <tbody id="tbody">
+                    <tr> 
+                        <th width="200">Ingredient</th>
+                        <th colspan="2" width="240">Expiry date</th>
+                    </tr>
+                    <!--Input row-->
+                    <tr align="center">
+        
+                        <!--Type ingredient name column-->
+                        <td>
+                            <label for="ingredient"></label>
+                            <input type="text" id="ingredient" name="ingredient" placeholder="Type in an ingredient...">
+                        </td>
+                        
+                        <!--Select expiry date column-->
+                        <td colspan="2" width="240">
+                            <label for="expdate"></label>
+                            <input type="date" id="expdate" name="expdate">
+                        </td>
+                    </tr>
+                </tbody>
+                </table>
+            </div>
             <br>
             <table>
                 <tr style="background-color: transparent;">
@@ -164,25 +177,28 @@
         <form id="recipe" style="display: none;" action="/loadRecipe" method="post">
             <input type="text" name="displayRecipe" id="displayRecipe">
         </form>
-            <table style="display: inline-flex;">
-                <tbody>
-                {% if data %}
-                <tr>
-                    <th>Possible recipes</th>
-                </tr>
-                {% endif %}
-                {% for recipe in data %}
-                <tr>
-                   <td id="r{{loop.index-1}}" name="{{ recipe }}" onclick="showAssocRes(id)">{{ recipe }}</td>
-                </tr>
-            
-                {% endfor %}
-                </tbody>
-            </table>
+            <div class="wrapper" style="border-radius: 25px/25px; overflow: hidden;">
+                <table style="display: inline-flex;">
+                    <tbody>
+                    {% if data %}
+                    <tr>
+                        <th width="250px">Possible recipes</th>
+                    </tr>
+                    {% endif %}
+                    {% for recipe in data %}
+                    <tr>
+                       <td class="recipe" id="r{{loop.index-1}}" name="{{ recipe }}" onclick="showAssocRes(id)">{{ recipe }}</td>
+                    </tr>
+                
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+           
     </div>
 
     {% if return_rec %}
-    <div style="display: inline-flex; max-height: 500px; vertical-align: top; overflow: scroll;">
+    <div style="display: inline-flex; max-height: 500px; vertical-align: top; overflow: scroll; border-radius: 25px/25px;">
         <table class="custom_table">
             <thead>
                 <tr align="center">
@@ -254,9 +270,9 @@
             document.getElementById("iList").value += ingredient + ",";
             document.getElementById("eList").value += expdate + ",";
             tbody.innerHTML += `
-            <tr style="background-color: rgb(255, 255, 255, 0.506);">
-                <td style="border-bottom: none; border-spacing: 0;">${ingredient}</td>
-                <td style="border-bottom: none; border-spacing: 0;">${expdate}</td>
+            <tr style="background-color: transparent;">
+                <td style="border-bottom: 1px solid black; border-spacing: 0;">${ingredient}</td>
+                <td style="border-bottom: 1px solid black; border-spacing: 0;">${expdate}</td>
                 <td style="border-bottom: none; border-spacing: 0;" id="${counter}"><button class = "deleteBtn">Delete</button></td>
             </tr>
             `;
@@ -287,24 +303,37 @@
     <script>
 
         function submitAdd() {
-            var form = document.getElementById("ingrList");
-            form.submit();
+            closeDoor();
+            setTimeout(function(){ 
+                var form = document.getElementById("ingrList");
+                form.submit();
+            }, 500);
         }
         function updateIngredients() {
-            var form = document.getElementById("updateIng");
-            form.submit();
+            closeDoor();
+            setTimeout(function(){ 
+                var form = document.getElementById("updateIng");
+                form.submit();
+            }, 500);
         }
         function updateRecipes() {
-            var form = document.getElementById("updateRecipes");
-            form.submit();
-            var loadingContainer = document.getElementById('loading-container');
-            loadingContainer.style.display = 'flex';
+            closeDoor();
+            setTimeout(function(){ 
+                var form = document.getElementById("updateRecipes");
+                form.submit();
+                var loadingContainer = document.getElementById('loading-container');
+                loadingContainer.style.display = 'flex';
+            }, 500);
         }
         function showAssocRes(id) {
-            var rName = document.getElementById(id).innerHTML
-            document.getElementById("displayRecipe").value = rName;
-            var form = document.getElementById("recipe");
-            form.submit();
+            closeDoor();
+            setTimeout(function(){ 
+                var rName = document.getElementById(id).innerHTML
+                document.getElementById("displayRecipe").value = rName;
+                var form = document.getElementById("recipe");
+                form.submit();
+
+            }, 500);
         }
     </script>
     
