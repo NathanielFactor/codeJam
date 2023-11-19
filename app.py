@@ -84,6 +84,7 @@ def add():
                     )
 
         conn.commit()
+    returnRec.clear()
     recipes.clear()
     conn.close()
     return redirect(url_for('index'))
@@ -137,6 +138,7 @@ def updateRecipes():
             recipes.append(name)
     else:
         recipes.clear()
+    returnRec.clear()
     conn.close()
     return redirect(url_for('index'))
 
