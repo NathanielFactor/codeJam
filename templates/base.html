@@ -106,7 +106,7 @@
                 <tbody id="tbody">
                 <tr> 
                     <th width="200">Ingredient</th>
-                    <th width="200">Expiry date</th>
+                    <th colspan="2" width="240">Expiry date</th>
                 </tr>
                 <!--Input row-->
                 <tr align="center">
@@ -118,7 +118,7 @@
                     </td>
                     
                     <!--Select expiry date column-->
-                    <td>
+                    <td colspan="2" width="240">
                         <label for="expdate"></label>
                         <input type="date" id="expdate" name="expdate">
                     </td>
@@ -179,21 +179,34 @@
                
             </table>
     </div>
-    <div class="mycontainer" style="display: inline-flex; vertical-align: top;">
-        <table style="display: inline-flex;">
 
-            <!--Column title-->
-            <tr>
-                <th1> strMeal </th1> <!--INSERT EMBED THE YOUTUBE VIDEO HERE-->
-                <th2> Image link </th2> <!--INSERT IMAGE-->
-                <p> Instructions </p> <!--INSERT INSTRUCTIONS-->
-            </tr>
-
+    <div style="display: inline-flex; max-height: 500px; vertical-align: top; overflow: scroll;">
+        <table class="custom_table">
+            <thead>
+                <tr align="center">
+                    <th width=300px;><a href="{{ return_rec[4] }}">{{ return_rec[0] }}</a></th>
+                    <!-- Add more headers if needed -->
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td width=100px;><img src="{{ return_rec[3]  }}" style="max-width: 200px;" alt=""> </td></tr>
+                <tr>
+                    <td>
+                        <div style="font-size: 12px; overflow: scroll;">
+                        {% for instruction in return_rec[2] %}
+                            {{ loop.index}}. {{ instruction }}
+                            <br>
+                        {% endfor %}
+                    </div>
+                </td>
+                    
+                </tr>
+                <!-- Add more rows if needed -->
+            </tbody>
         </table>
     </div>
  
     
-  
     <script>
       const form = document.getElementById("addIngr");
       const tbody = document.getElementById("tbody");
@@ -238,10 +251,10 @@
             document.getElementById("iList").value += ingredient + ",";
             document.getElementById("eList").value += expdate + ",";
             tbody.innerHTML += `
-            <tr>
-                <td>${ingredient}</td>
-                <td>${expdate}</td>
-                <td id="${counter}"><button class = "deleteBtn">Delete</button></td>
+            <tr style="background-color: transparent;">
+                <td style="border-bottom: 1px solid black; border-spacing: 0;">${ingredient}</td>
+                <td style="border-bottom: 1px solid black; border-spacing: 0;">${expdate}</td>
+                <td style="border-bottom: none; border-spacing: 0;" id="${counter}"><button class = "deleteBtn">Delete</button></td>
             </tr>
             `;
             counter++;

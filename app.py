@@ -59,7 +59,6 @@ def index():
             ret_ing.append(datapoint[0])
             ret_days.append(datapoint[1])
             i_ids.append(datapoint[2])
-    print(returnRec)  
     return render_template('index.html', post=ret_ing, days=ret_days, exp=exp_ing, eDays=exp_days, data=recipes, e_ids=e_ids, i_ids=i_ids, return_rec = returnRec)
 
 @app.route('/add', methods = ['POST'])
@@ -148,8 +147,9 @@ def load():
     recipe = get_recipe_by_name(name)
     returnRec.append(recipe.get_meal())
     returnRec.append(recipe.get_category())
-    returnRec.append(recipe.get_instructions())
+    returnRec.append(recipe.get_instructions().split('.'))
     returnRec.append(recipe.get_thumbnail())
+    returnRec.append(recipe.get_vid())
     return redirect(url_for('index'))
 
 if __name__ == '__main__':

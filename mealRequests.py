@@ -24,14 +24,14 @@ def get_meals_by_category(category):
 
 def get_first_two_words(input_string):
     words = input_string.split()
-    if len(words) >= 2:
+    if len(words) >= 5:
         print(words[0] + " " + words[1])
-        return words[0] + " " + words[1]
+        return parse.quote(words[0] + " " + words[1])
     else:
         return input_string
 
 def get_recipe_by_name(name):
-    url = 'https://www.themealdb.com/api/json/v1/1/search.php?s=' + parse.quote(name)
+    url = 'https://www.themealdb.com/api/json/v1/1/search.php?s=' + (name)
     recipe = None
     try:
         data = requests.get(url).json()   
@@ -40,7 +40,8 @@ def get_recipe_by_name(name):
                             recipe_data['strMeal'],
                             recipe_data['strCategory'],
                             recipe_data['strInstructions'],
-                            recipe_data['strMealThumb'])
+                            recipe_data['strMealThumb'],
+                            recipe_data['strYoutube'])
     except (ValueError, KeyError, TypeError):
         print("JSON format error")
 
@@ -142,6 +143,8 @@ def get_meals_by_ingredients(ingredients):
             if id not in ids:
                 meals.append(meal)
                 ids.append(id)
+    print("ids: " + str(ids))
+    print("meals: " + str(meals))
     m_len = len(meals)
     temporary = []
     tempo_id =[]
@@ -151,6 +154,8 @@ def get_meals_by_ingredients(ingredients):
             if ids[t_int] not in tempo_id:
                 temporary.append(meals[t_int])
                 tempo_id.append(ids[t_int])
+    else:
+        temporary = meals
     return temporary
 
 def get_meal_names(meals):

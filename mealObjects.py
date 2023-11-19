@@ -34,12 +34,13 @@ class Meal:
         return f'{self.id} {self.meal} {self.thumbnail}'
 
 class Recipe:
-    def __init__(self, id, meal, category, instructions, thumbnail):
+    def __init__(self, id, meal, category, instructions, thumbnail, vid):
         self.id = id
         self.meal = meal
         self.category = category
         self.instructions = instructions
         self.thumbnail = thumbnail
+        self.vid = vid
 
     def get_id(self):
         return self.id
@@ -71,8 +72,14 @@ class Recipe:
     def set_thumbnail(self, thumbnail):
         self.thumbnail = thumbnail
 
+    def get_vid(self):  
+        return self.vid
+    
+    def set_vid(self, vid): 
+        self.vid = vid
+
     def __str__(self):
-        return f'{self.id} {self.meal} {self.category} {self.instructions} {self.thumbnail}'
+        return f'{self.id} {self.meal} {self.category} {self.instructions} {self.thumbnail} {self.vid}'
 
 class Area:
     def __init__(self, area):
