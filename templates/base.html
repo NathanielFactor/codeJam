@@ -42,7 +42,7 @@
                 <table>
                     <!--Table title-->
                     <tr align="center">
-                      <th colspan="3">Previously entered items</th>
+                      <th colspan="3">Your Fridge</th>
                     </tr>
                 
                     <!--Column titles-->
@@ -172,6 +172,7 @@
        
     </div>
     <div class="mycontainer" style="display: inline-flex; vertical-align: top;">
+        
         <form id="recipe" style="display: none;" action="/loadRecipe" method="post">
             <input type="text" name="displayRecipe" id="displayRecipe">
         </form>
@@ -180,7 +181,9 @@
                     <tbody>
                     {% if data %}
                     <tr>
-                        <th width="250px">Possible recipes</th>
+                        <th width="250px">Possible recipes 
+                        <div class="circle bounce2" style="display: inline-block; position: fixed; margin-left: 10px; margin-top: -5px;"></div>
+                        </th>
                     </tr>
                     {% endif %}
                     {% for recipe in data %}
