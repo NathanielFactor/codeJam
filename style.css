@@ -117,14 +117,14 @@ html,
     background-color: rgba(255, 255, 255, 0.747)
   }
 
-  tr:hover {background-color: rgba(229, 162, 157, 0.56);}
+  tr:hover {background-color: rgba(131, 234, 171, 0.664);}
 
   tr:hover th {
     background-color: initial; /* or transparent, or any other style you prefer */
   }
   
   th {
-    background-color: rgba(234, 131, 131, 0.444);
+    background-color: rgba(119, 213, 155, 0.664);
     color: rgb(0, 0, 0);
   }
 

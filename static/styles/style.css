@@ -34,7 +34,7 @@ html,
     text-shadow: 3px 3px 0 var(--color-secondary), 6px 6px 0 var(--color-tertiary),
       9px 9px var(--color-quaternary), 12px 12px 0 var(--color-quinary);
     font-family: bungee, sans-serif;
-    font-weight: 400;
+    font-weight: bold;
     text-transform: uppercase;
     font-size: calc(2rem + 5vw);
     text-align: center;
@@ -216,27 +216,26 @@ html,
   th, td {
     padding-left: 10px;
     padding-right: 10px;
-    border-bottom: 1px solid #cd8787;
-    border: none !important;
+    border-radius: 12px;
   }
 
   tr {
-    background-color: rgba(255, 255, 255, 0.506)
-
+    background-color: rgba(255, 255, 255, 0.506);
+    border-radius: 12px;
   }
 
-  tr:hover {background-color: rgba(229, 162, 157, 0.56);}
+  tr:hover {background-color: rgba(131, 234, 171, 0.664);}
   
   th {
-    background-color: rgba(234, 131, 131, 0.444);
-    color: rgb(23, 150, 38);
+    background-color: rgba(119, 213, 155, 0.664);
+    color: rgb(0, 0, 0);
   }
 
   button {
     font-family: "Lucida Console", monospace;
     border-radius: 12px;
     font-size: 16px;
-    background-color: rgb(113, 189, 119);
+    background-color: rgb(230, 177, 191);
     color: rgb(0, 0, 0);
     display: inline-block;
     text-align: center;
@@ -244,7 +243,7 @@ html,
     transition: all 0.5s;
     cursor: pointer;
     margin: 5px;
-    box-shadow: 0 6px rgba(67, 113, 71, 0.774);
+    box-shadow: 0 6px rgb(201, 157, 169);
     font-size: 12px;
   }
 
@@ -254,7 +253,7 @@ button:hover {
 }
 
 button:active {
-    box-shadow: 0 6px rgba(67, 113, 71, 0.774);
+    box-shadow: 0 6px rgb(183, 137, 149);
     transform: translateY(4px);
   }
   .custom_table {
