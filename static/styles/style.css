@@ -97,11 +97,12 @@ html,
 
   .fridge {
     position: absolute;
-    left: 2%;
+    left: 3%;
     width: 350px;
     height: 500px;
     background-color: #ccc;
     border: 10px solid #ccc;
+
     border-radius: 10px;
     overflow: hidden;
     cursor: pointer;
@@ -216,12 +217,10 @@ html,
   th, td {
     padding-left: 10px;
     padding-right: 10px;
-    border-radius: 12px;
   }
 
   tr {
     background-color: rgba(255, 255, 255, 0.506);
-    border-radius: 12px;
   }
 
   tr:hover {background-color: rgba(131, 234, 171, 0.664);}
@@ -229,6 +228,10 @@ html,
   th {
     background-color: rgba(119, 213, 155, 0.664);
     color: rgb(0, 0, 0);
+  }
+
+  .recipe:hover {
+    cursor:pointer;
   }
 
   button {

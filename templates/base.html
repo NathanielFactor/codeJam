@@ -111,31 +111,33 @@
     
         <div style="margin-left: 400px;">
         <form id="addIngr" style="display: inline-block;">
-            <table id="table" style="display: inline-flex;">
-                <!--Column titles-->
-                
-                <tbody id="tbody">
-                <tr> 
-                    <th width="200">Ingredient</th>
-                    <th colspan="2" width="240">Expiry date</th>
-                </tr>
-                <!--Input row-->
-                <tr align="center">
-    
-                    <!--Type ingredient name column-->
-                    <td>
-                        <label for="ingredient"></label>
-                        <input type="text" id="ingredient" name="ingredient" placeholder="Type in an ingredient...">
-                    </td>
+            <div class="wrapper" style="border-radius: 20px/20px; overflow: hidden;">
+                <table id="table" style="display: inline-flex;">
+                    <!--Column titles-->
                     
-                    <!--Select expiry date column-->
-                    <td colspan="2" width="240">
-                        <label for="expdate"></label>
-                        <input type="date" id="expdate" name="expdate">
-                    </td>
-                </tr>
-            </tbody>
-            </table>
+                    <tbody id="tbody">
+                    <tr> 
+                        <th width="200">Ingredient</th>
+                        <th colspan="2" width="240">Expiry date</th>
+                    </tr>
+                    <!--Input row-->
+                    <tr align="center">
+        
+                        <!--Type ingredient name column-->
+                        <td>
+                            <label for="ingredient"></label>
+                            <input type="text" id="ingredient" name="ingredient" placeholder="Type in an ingredient...">
+                        </td>
+                        
+                        <!--Select expiry date column-->
+                        <td colspan="2" width="240">
+                            <label for="expdate"></label>
+                            <input type="date" id="expdate" name="expdate">
+                        </td>
+                    </tr>
+                </tbody>
+                </table>
+            </div>
             <br>
             <table>
                 <tr style="background-color: transparent;">
@@ -173,25 +175,28 @@
         <form id="recipe" style="display: none;" action="/loadRecipe" method="post">
             <input type="text" name="displayRecipe" id="displayRecipe">
         </form>
-            <table style="display: inline-flex;">
-                <tbody>
-                {% if data %}
-                <tr>
-                    <th>Possible recipes</th>
-                </tr>
-                {% endif %}
-                {% for recipe in data %}
-                <tr>
-                   <td id="r{{loop.index-1}}" name="{{ recipe }}" onclick="showAssocRes(id)">{{ recipe }}</td>
-                </tr>
-            
-                {% endfor %}
-                </tbody>
-            </table>
+            <div class="wrapper" style="border-radius: 25px/25px; overflow: hidden;">
+                <table style="display: inline-flex;">
+                    <tbody>
+                    {% if data %}
+                    <tr>
+                        <th width="250px">Possible recipes</th>
+                    </tr>
+                    {% endif %}
+                    {% for recipe in data %}
+                    <tr>
+                       <td class="recipe" id="r{{loop.index-1}}" name="{{ recipe }}" onclick="showAssocRes(id)">{{ recipe }}</td>
+                    </tr>
+                
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+           
     </div>
 
     {% if return_rec %}
-    <div style="display: inline-flex; max-height: 500px; vertical-align: top; overflow: scroll;">
+    <div style="display: inline-flex; max-height: 500px; vertical-align: top; overflow: scroll; border-radius: 25px/25px;">
         <table class="custom_table">
             <thead>
                 <tr align="center">
@@ -263,9 +268,9 @@
             document.getElementById("iList").value += ingredient + ",";
             document.getElementById("eList").value += expdate + ",";
             tbody.innerHTML += `
-            <tr style="background-color: rgb(255, 255, 255, 0.506);">
-                <td style="border-bottom: none; border-spacing: 0;">${ingredient}</td>
-                <td style="border-bottom: none; border-spacing: 0;">${expdate}</td>
+            <tr style="background-color: transparent;">
+                <td style="border-bottom: 1px solid black; border-spacing: 0;">${ingredient}</td>
+                <td style="border-bottom: 1px solid black; border-spacing: 0;">${expdate}</td>
                 <td style="border-bottom: none; border-spacing: 0;" id="${counter}"><button class = "deleteBtn">Delete</button></td>
             </tr>
             `;
@@ -321,10 +326,11 @@
         function showAssocRes(id) {
             closeDoor();
             setTimeout(function(){ 
-                var form = document.getElementById("updateRecipes");
+                var rName = document.getElementById(id).innerHTML
+                document.getElementById("displayRecipe").value = rName;
+                var form = document.getElementById("recipe");
                 form.submit();
-                var loadingContainer = document.getElementById('loading-container');
-                loadingContainer.style.display = 'flex';
+
             }, 500);
         }
     </script>
