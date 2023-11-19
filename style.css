@@ -17,7 +17,7 @@ html,
 
 
   body {
-    background-image: url("orangekitchen.png");
+    background-image: url("fresh-colourful-ingredients-mexican-cuisine.jpg");
     background-repeat: no-repeat;
     background-size: 1600px 900px;
 	font-weight: 100;
@@ -115,6 +115,7 @@ html,
 
   tr {
     border-radius: 12px;
+    background-color: rgba(255, 255, 255, 0.747)
   }
 
   tr:hover {background-color: rgba(229, 162, 157, 0.56);}
@@ -124,6 +125,7 @@ html,
   }
   
   th {
+    background-color: rgba(234, 131, 131, 0.444);
     color: rgb(0, 0, 0);
   }
 
@@ -154,9 +156,19 @@ button:active {
     transform: translateY(4px);
   }
 
+  .custom_table {
+    font-family: "Monaco";
+    font-size: 16px;
+    width: 100%; /* Set the width as needed */
+    border-collapse: collapse;
+}
 
+.custom_table th, .custom_table td {
+  padding-left: 10px;
+  padding-right: 10px;
+  border-bottom: 1px solid #ffffff;
+}
 
-  .custom-position {
-    position: relative;
-    right: 5000px; /* Move the image 50 pixels to the right */
-  }
+.custom_table tr {
+    background-color: rgba(255, 255, 255, 0.506) !important;
+}
