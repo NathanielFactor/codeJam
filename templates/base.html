@@ -79,9 +79,12 @@
                 </form>
                 </div>
         </div>
-        <div id="loading-container" style="display: none; width: 100vw; height: 100vh; position: absolute; top:0; background: rgba(255, 255, 255, 0.8); text-align: center; z-index: 10; opacity: 100;">
-            <img id="loading-image" style="height: 100vh; width: 100vw;" src="https://cdn.dribbble.com/users/655390/screenshots/2186909/loader-for-dribble.gif" alt="Loading..." style="width: 1500px; height: 800px;"> 
+        <div id="loading-container" style=" display: none; width: 100vw; height: 100vh; position: absolute; top:0; background: rgb(245,245,245); text-align: center; margin-left:-8px;  align-items: center; justify-content: center; z-index: 10; opacity: 100;">
+            <div id="">
+                <img id="loading-image" src="https://d33wubrfki0l68.cloudfront.net/3dafc215e0dc2be7e854dc25c44c453fdaf4be87/ccccb/uploads/foodrush-loader.gif" alt="Loading..." style="width: 350px"> 
+            </div>
         </div>
+
         
     
         <script>
@@ -292,7 +295,7 @@
             var form = document.getElementById("updateRecipes");
             form.submit();
             var loadingContainer = document.getElementById('loading-container');
-            loadingContainer.style.display = 'block';
+            loadingContainer.style.display = 'flex';
         }
         function showAssocRes(id) {
             var rName = document.getElementById(id).innerHTML
