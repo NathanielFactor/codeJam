@@ -155,4 +155,6 @@ def load():
     return redirect(url_for('index'))
 
 if __name__ == '__main__':
+    recipes.clear()
+    returnRec.clear()
     app.run(debug=True)

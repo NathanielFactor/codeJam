@@ -30,7 +30,9 @@
         <div class="fridge" style="z-index: 3;" onclick="openDoor()">
             <div class="inside"></div>
             <div class="door"></div>
-            <div class="handle"></div>
+            <div class="handle1"></div>
+            <div class="split"></div>
+            <div class="handle2"></div>
         </div>
         <div class="fridge" style="z-index: 1; background-color: white;">
             <div class="close" onclick="openDoor()"></div>
@@ -163,8 +165,7 @@
             <input type="text" name="displayRecipe" id="displayRecipe">
         </form>
             <table style="display: inline-flex;">
-
-                <!--Column title-->
+                <tbody>
                 {% if data %}
                 <tr>
                     <th>Possible recipes</th>
@@ -176,7 +177,7 @@
                 </tr>
             
                 {% endfor %}
-               
+                </tbody>
             </table>
     </div>
 
