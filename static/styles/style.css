@@ -7,16 +7,16 @@ html,
   }
   
   :root {
-    --color-primary: #f6aca2;
-    --color-secondary: #f49b90;
-    --color-tertiary: #f28b7d;
-    --color-quaternary: #f07a6a;
-    --color-quinary: #ee6352;
+    --color-primary: rgb(82, 237, 188);
+    --color-secondary: rgb(68, 197, 156);
+    --color-tertiary: rgb(52, 150, 119);
+    --color-quaternary: rgb(32, 91, 72);
+    --color-quinary: rgb(27, 78, 62);
   }
   
 
   body {
-    background-image: url("../images/fresh-colourful-ingredients-mexican-cuisine.jpg");
+    background-image: url("../images/aesthetic_kitchen_blur.png");
     background-repeat: no-repeat;
     background-size: 1600px 900px;
 
