@@ -8,7 +8,7 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/style.css') }}" />
 
     <div class="content">
-        <h2 class="text-shadows">Waste2Taste</h2>
+        <h2 class="text-shadows" style="font-family: Lucida Console, monospace;">Waste 2 Taste</h2>
     </div>
 
     <style>
@@ -35,7 +35,7 @@
             <div class="handle2"></div>
         </div>
         <div class="fridge" style="z-index: 1; background-color: white;">
-            <div class="close" onclick="openDoor()"></div>
+            <div class="close" onclick="closeDoor()"></div>
             <br><br>
             <div>
                 <form style="display: inline-flex;" id="updateIng" action="/updateIngredients" method="post">
@@ -93,10 +93,19 @@
             function openDoor() {
                 var fridge = document.querySelector('.fridge');
                 var door = document.querySelector('.door');
-    
-                // Toggle the 'open' class to rotate the door
-                fridge.classList.toggle('open');
-                door.classList.toggle('open');
+
+                fridge.classList.add('open');
+                door.classList.add('open');
+
+                
+            }
+
+            function closeDoor(){
+                var fridge = document.querySelector('.fridge');
+                var door = document.querySelector('.door');
+
+                fridge.classList.remove('open');
+                door.classList.remove('open');
             }
         </script>
     
@@ -287,24 +296,36 @@
     <script>
 
         function submitAdd() {
-            var form = document.getElementById("ingrList");
-            form.submit();
+            closeDoor();
+            setTimeout(function(){ 
+                var form = document.getElementById("ingrList");
+                form.submit();
+            }, 500);
         }
         function updateIngredients() {
-            var form = document.getElementById("updateIng");
-            form.submit();
+            closeDoor();
+            setTimeout(function(){ 
+                var form = document.getElementById("updateIng");
+                form.submit();
+            }, 500);
         }
         function updateRecipes() {
-            var form = document.getElementById("updateRecipes");
-            form.submit();
-            var loadingContainer = document.getElementById('loading-container');
-            loadingContainer.style.display = 'flex';
+            closeDoor();
+            setTimeout(function(){ 
+                var form = document.getElementById("updateRecipes");
+                form.submit();
+                var loadingContainer = document.getElementById('loading-container');
+                loadingContainer.style.display = 'flex';
+            }, 500);
         }
         function showAssocRes(id) {
-            var rName = document.getElementById(id).innerHTML
-            document.getElementById("displayRecipe").value = rName;
-            var form = document.getElementById("recipe");
-            form.submit();
+            closeDoor();
+            setTimeout(function(){ 
+                var form = document.getElementById("updateRecipes");
+                form.submit();
+                var loadingContainer = document.getElementById('loading-container');
+                loadingContainer.style.display = 'flex';
+            }, 500);
         }
     </script>
     
